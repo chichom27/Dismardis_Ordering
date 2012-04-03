@@ -1,0 +1,26 @@
+<h1>Nueva Familia</h1>
+
+<%= form_for :familium, :url => familia_path do |f| -%>
+	
+	  
+	  <fieldset>
+<legend><h2>Formulario</h2></legend>
+  
+  <p>
+	<%= label_tag 'Nombre' %><br />
+    <%= f.text_field :Nombre %>
+  </p>
+  <p>
+    <%= label_tag 'Codigo' %><br />
+    <%= f.text_field :Codigo %>
+  </p>
+  <p>
+    <%= label_tag 'Categoria' %><br />
+    <%= f.collection_select :idCategoria, Categorium.all, :id, :Nombre %>
+  </p>
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Familia' %></p>
+	<% end %>
+
+<%= link_to 'Listado de Familias', familia_path %>

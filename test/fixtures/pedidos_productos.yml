@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  idPedido: 1
+  idProducto: 1
+
+two:
+  idPedido: 1
+  idProducto: 1

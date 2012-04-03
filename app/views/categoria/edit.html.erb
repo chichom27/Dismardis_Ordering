@@ -1,0 +1,20 @@
+<h1>Editar Categoria</h1>
+
+<%= form_for (@categorium) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+      <p>
+	    <%= f.label 'Nombre' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Categoria" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @categorium.Nombre, @categorium %> |
+<%= link_to 'Listado de Categorias', categoria_path %>
+
+

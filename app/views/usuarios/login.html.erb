@@ -1,0 +1,23 @@
+<h1>Log in</h1>
+
+<%= form_for :Usuario do |form| %>
+<fieldset>
+	<legend>
+		Sus Credenciales
+	</legend>
+	
+	<p>
+	<label for="Username">Username: </label>	
+	<%= form.text_field :Username	%>				
+	</p>
+	<p>
+	<label for="Password">Password: </label>	
+	<%= form.password_field :Password	%>
+	</p>
+	<p>
+		<%= submit_tag "Login", :class => "submit" %>
+	</p>
+	
+</fieldset>
+<%end%>
+<%= link_to 'Atras', usuarios_path %>

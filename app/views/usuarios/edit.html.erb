@@ -1,0 +1,66 @@
+<h1>Editar Usuario <%=  @usuario.Username.capitalize! %></h1>
+
+<%= form_for (@usuario) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+	  <p>
+		<%= f.label 'Codigo' %><br />
+		<%= f.text_field :Codigo %>
+	  </p>
+      <p>
+	    <%= f.label 'Direccion del Negocio' %><br />
+	    <%= f.text_field :Direccion %>
+	  </p>
+	  <p>
+	    <%= f.label 'Referencia' %><br />
+	    <%= f.text_field :Referencia %>
+	  </p>
+	  <p>
+	    <%= f.label 'Zona' %><br />
+	    <%= f.text_field :Zona %>
+	  </p>
+	  <p>
+	    <%= f.label 'Ciudad' %><br />
+	    <%= f.collection_select :idCiudad, Ciudad.all, :id, :Nombre %>
+	  </p>
+	  <p>
+	    <%= f.label 'Telefono' %><br />
+	    <%= f.text_field :Telefono %>
+	  </p>
+	  <p>
+		<%= f.label 'Nombre del Usuario' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+	  <p>
+	    <%= f.label 'Apellido del Usuario' %><br />
+	    <%= f.text_field :Apellido %>
+	  </p>
+	  <p>
+	    <%= f.label 'Cedula del Usuario' %><br />
+	    <%= f.text_field :Cedula %>
+	  </p>
+	  <p>
+	    <%= f.label 'Descuento' %><br />
+	    <%= f.text_field :Descuento %>
+	  </p>
+	  <p>
+	  	<%= f.label 'Tipo de Usuario' %><br />
+	  	<%= f.collection_select :idTipoUsuario, TipoUsuario.find(:all, :conditions =>  ["id <> ? ", 1]), :id, :Nombre %>
+	  </p>
+	  <p>
+	    <%= f.label 'Email' %><br />
+	    <%= f.text_field :Email %>
+	  </p>
+	  <p>
+	    <%= f.label 'Observaciones' %><br />
+	    <%= f.text_area :Observaciones %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Usuario" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @usuario.Username, @usuario %> |
+<%= link_to 'Listado de Usuarios', usuarios_path %>

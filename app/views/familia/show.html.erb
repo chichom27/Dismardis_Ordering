@@ -1,0 +1,19 @@
+
+<p>
+  <b>Nombre:</b>
+  <%= @familium.Nombre %>
+</p>
+
+<p>
+  <b>Codigo:</b>
+  <%= @familium.Codigo %>
+</p>
+
+<p>
+  <b>Categoria:</b>
+  <%= @familium.categ.Nombre %>
+</p>
+
+
+<%= link_to 'Editar', edit_familium_path(@familium) %> |
+<%= link_to 'Listado de Familias', familia_path %>

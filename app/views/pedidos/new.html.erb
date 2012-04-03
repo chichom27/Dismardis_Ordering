@@ -1,0 +1,39 @@
+<h1>New pedido</h1>
+
+
+
+<%= form_for :pedido, :url => pedidos_path do |f| -%>
+
+<p><%= label_tag 'Codigo' %><br/>
+<%= f.text_field :Codigo %></p>
+
+
+<p><%= f.hidden_field :idUsuario, :value => session[:Usuario_id] %> </p>
+
+
+<p>
+	
+	<table>
+	  <tr>
+	    <th>Producto</th>
+	    <th>Codigo</th>
+	    <th>Cantidad</th>
+	  </tr>
+	
+	<% @items.each do |item| %>
+	  <tr>
+	    <td><%= item.prod.Nombre %></td>
+	    <td><%= item.prod.Codigo %></td>
+	    
+	    <td><%= text_field_tag "items[#{item.prod.id}]", item.cantidad, :id => "items_#{item.prod.id}" %></td>
+	  </tr>
+	<% end %>
+	</table>
+	
+</p>
+   <% params[:items] = @items %>
+<p><%= submit_tag 'Realizar Pedido' %></p>
+<% end -%>
+
+
+<%= link_to 'Atras', pedidos_path %>

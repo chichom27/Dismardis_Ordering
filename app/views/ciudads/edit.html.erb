@@ -1,0 +1,23 @@
+<h1>Editar Ciudad</h1>
+
+<%= form_for (@ciudad) do |f| -%>
+	
+	  
+	<fieldset>
+		<legend><h2>Formulario</h2></legend>
+		<p>
+			<%= f.label 'Nombre' %><br />
+		    <%= f.text_field :Nombre %>
+		</p>
+		<p>
+	  	  <%= f.label 'Provincia' %><br />
+	  	  <%= f.collection_select :idProvincia, Provincium.all, :id, :Nombre %>
+	    </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Ciudad" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @ciudad.Nombre, @ciudad %> |
+<%= link_to 'Listado de Ciudades', ciudads_path %>
+

@@ -1,0 +1,31 @@
+<h1>Listado Ciudades</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+  </tr>
+
+<% @ciudads.each do |ciudad| %>
+  <tr>
+    <td><%= link_to ciudad.Nombre, ciudad %></td>
+    <td><%= link_to 'Editar', edit_ciudad_path(ciudad) %></td>
+    
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<td><%= link_to 'Borrar', ciudad, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Ciudad', new_ciudad_path %>

@@ -1,0 +1,33 @@
+<h1>Listado de Provincias</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+    
+  </tr>
+
+<% @provincia.each do |provincium| %>
+  <tr>
+    <td><%= link_to provincium.Nombre, provincium %></td>
+    <td><%= link_to 'Editar', edit_provincium_path(provincium) %></td>
+    
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<td><%= link_to 'Borrar', provincium, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Provincia', new_provincium_path %>

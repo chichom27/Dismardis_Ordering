@@ -1,0 +1,29 @@
+<h1>Listing de Tipos de Estado de Pedidos</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+  </tr>
+
+<% @estado_pedidos.each do |estado_pedido| %>
+  <tr>
+    <td><%= link_to estado_pedido.Nombre , estado_pedido %></td>
+    <td><%= link_to 'Editar', edit_estado_pedido_path(estado_pedido) %></td>
+    <% if session[:Usuario_idTP] == 1  %>
+	 
+	 	<td><%= link_to 'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Estado de Pedido', new_estado_pedido_path %>

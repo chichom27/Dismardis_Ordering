@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  Username: MyString
+  Password: MyString
+  Nombre: MyString
+  Apellido: MyString
+  idEmpresa: 1
+  idAgencia: 1
+  idTipoUsuario: 1
+
+two:
+  Username: MyString
+  Password: MyString
+  Nombre: MyString
+  Apellido: MyString
+  idEmpresa: 1
+  idAgencia: 1
+  idTipoUsuario: 1

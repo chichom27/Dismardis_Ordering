@@ -1,0 +1,19 @@
+<h1>Editar Estado de Pedido</h1>
+
+<%= form_for (@estado_pedido) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+      <p>
+	    <%= f.label 'Nombre' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Estado de Pedido" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @estado_pedido.Nombre, @estado_pedido %> |
+<%= link_to 'Listado de Estado de Pedido', estado_pedidos_path %>
+

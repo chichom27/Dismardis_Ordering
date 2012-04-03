@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  idProveedor: 1
+  idCategoria: 1
+
+two:
+  idProveedor: 1
+  idCategoria: 1

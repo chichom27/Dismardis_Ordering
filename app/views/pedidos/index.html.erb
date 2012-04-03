@@ -1,0 +1,19 @@
+<h1>Listado de Pedidos</h1>
+
+<table>
+  <tr>
+    <th>Usuario</th>
+    <th>Codigo</th>
+  </tr>
+
+<% @pedidos.each do |pedido| %>
+  <tr>
+    <td><%= link_to pedido.user.Username, pedido %></td>
+    <td><%= pedido.Codigo %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Pedido', new_pedido_path %>

@@ -1,0 +1,27 @@
+<h1>Listing agencia</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Idempresa</th>
+    <th>Codigo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @agencia.each do |agencium| %>
+  <tr>
+    <td><%= agencium.Nombre %></td>
+    <td><%= agencium.idEmpresa %></td>
+    <td><%= agencium.Codigo %></td>
+    <td><%= link_to 'Show', agencium %></td>
+    <td><%= link_to 'Edit', edit_agencium_path(agencium) %></td>
+    <td><%= link_to 'Destroy', agencium, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Agencium', new_agencium_path %>

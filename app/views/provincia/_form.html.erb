@@ -1,0 +1,21 @@
+<%= form_for(@provincium) do |f| %>
+  <% if @provincium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@provincium.errors.count, "error") %> prohibited this provincium from being saved:</h2>
+
+      <ul>
+      <% @provincium.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :Nombre %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

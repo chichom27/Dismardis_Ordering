@@ -1,0 +1,47 @@
+<h1>Nuevo Proveedor</h1>
+
+<%= form_for :proveedor, :url => proveedors_path do |f| -%>
+	
+	  
+  <fieldset>
+	<legend><h2>Formulario</h2></legend>
+	  
+	  <p>
+	    <%= label_tag 'Codigo' %><br />
+	    <%= f.text_field :Codigo %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Nombre' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Direccion' %><br />
+	    <%= f.text_field :Direccion %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Telefono' %><br />
+	    <%= f.text_field :Telefono %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Contacto' %><br />
+	    <%= f.text_field :Contacto %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Telefono del Contacto' %><br />
+	    <%= f.text_field :TelContacto %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Email del Contacto' %><br />
+	    <%= f.text_field :Email %>
+	  </p>
+	  <p>
+	    <%= label_tag 'RUC' %><br />
+	    <%= f.text_field :RUC %>
+	  </p>
+	  
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Proveedor' %></p>
+<% end %>
+
+<%= link_to 'Listado de Proveedores', proveedors_path %>

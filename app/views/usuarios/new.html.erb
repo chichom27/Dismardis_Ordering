@@ -1,0 +1,99 @@
+<h1>Nuevo Usuario</h1>
+
+
+<%= form_for :usuario, :url => usuarios_path do |f| -%>
+	
+	  
+	  <fieldset>
+<legend><h2>Formulario</h2></legend>
+  
+  <p>
+    <%= label_tag 'Username' %><br />
+    <%= f.text_field :Username %>
+  </p>
+  <p>
+  	<%= f.hidden_field :Password, :value => 'password' %>
+	
+	<!--
+	<%= label_tag 'Password' %><br />
+	<%= f.password_field :Password %><br />
+	<br /><label for="password_confirmation">Confirm Password</label><br />
+	<%= f.password_field :password_confirmation %>
+	
+	TIENE QUE agregar a un link en email al usuario final
+	
+	-->
+  </p>
+  <p>
+    <h2>Datos Cliente<br /></h2>
+  </p>
+  <p>
+    <%= label_tag 'Codigo' %><br />
+    <%= f.text_field :Codigo %>
+  </p>
+  <p>
+    <%= label_tag 'Nombre del Negocio' %><br />
+    <%= f.text_field :NombreNegocio %>
+  </p>
+  <p>
+    <%= label_tag 'Direccion del Negocio' %><br />
+    <%= f.text_field :Direccion %>
+  </p>
+  <p>
+    <%= label_tag 'Referencia' %><br />
+    <%= f.text_field :Referencia %>
+  </p>
+  <p>
+    <%= label_tag 'Zona' %><br />
+    <%= f.text_field :Zona %>
+  </p>
+  <p>
+    <%= label_tag 'Ciudad' %><br />
+    <%= f.collection_select :idCiudad, Ciudad.all, :id, :Nombre %>
+  </p>
+  <p>
+    <%= label_tag 'Telefono' %><br />
+    <%= f.text_field :Telefono %>
+  </p>
+  <p>
+	<%= label_tag 'Nombre del Usuario' %><br />
+    <%= f.text_field :Nombre %>
+  </p>
+  <p>
+    <%= label_tag 'Apellido del Usuario' %><br />
+    <%= f.text_field :Apellido %>
+  </p>
+  <p>
+    <%= label_tag 'Cedula del Usuario' %><br />
+    <%= f.text_field :Cedula %>
+  </p>
+  <p>
+    <%= label_tag 'Descuento' %><br />
+    <%= f.text_field :Descuento %>
+  </p>
+  <p>
+  	<%= label_tag 'Tipo de Usuario' %><br />
+  	<%= f.collection_select :idTipoUsuario, TipoUsuario.find(:all, :conditions =>  ["id <> ? ", 1]), :id, :Nombre %>
+  </p>
+  <p>
+	<%= label_tag 'Email' %><br />
+	<%= f.text_field :Email %>
+  </p>
+  <p>
+    <%= label_tag 'Observaciones' %><br />
+    <%= f.text_area :Observaciones %>
+  </p>
+  
+  <p>
+  	<!--
+    <%= f.hidden_field :idEmpresa, :value => 1 %>
+    <%= f.hidden_field :idAgencia, :value => 1 %>
+    <%= f.hidden_field :idTipoUsuario, :value => 1 %>
+    -->
+  </p>
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Usuario' %></p>
+	<% end %>
+
+<%= link_to 'Listado de Usuarios', usuarios_path %>

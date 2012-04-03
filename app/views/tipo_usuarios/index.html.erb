@@ -1,0 +1,23 @@
+<h1>Listing tipo_usuarios</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tipo_usuarios.each do |tipo_usuario| %>
+  <tr>
+    <td><%= tipo_usuario.Nombre %></td>
+    <td><%= link_to 'Show', tipo_usuario %></td>
+    <td><%= link_to 'Edit', edit_tipo_usuario_path(tipo_usuario) %></td>
+    <td><%= link_to 'Destroy', tipo_usuario, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tipo usuario', new_tipo_usuario_path %>

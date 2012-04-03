@@ -1,0 +1,29 @@
+<h1>Listado de Categorias</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+  </tr>
+
+<% @categoria.each do |categorium| %>
+  <tr>
+    <td><%= link_to categorium.Nombre, categorium %></td>
+    <td><%= link_to 'Editar', edit_categorium_path(categorium) %></td>
+    <% if session[:Usuario_idTP] == 1  %>
+	 
+	 	<td><%= link_to 'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Categoria', new_categorium_path %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  idUsuario: 1
+  Codigo: MyString
+
+two:
+  idUsuario: 1
+  Codigo: MyString

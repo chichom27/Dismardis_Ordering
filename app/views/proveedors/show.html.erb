@@ -1,0 +1,47 @@
+
+
+<p>
+  <b>Codigo:</b>
+  <%= @proveedor.Codigo %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @proveedor.Nombre %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%= @proveedor.Direccion %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @proveedor.Telefono %>
+</p>
+
+<p>
+  <b>Contacto:</b>
+  <%= @proveedor.Contacto %>
+</p>
+
+<p>
+  <b>Telefono del Contacto:</b>
+  <%= @proveedor.TelContacto %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @proveedor.Email %>
+</p>
+
+<p>
+  <b>RUC:</b>
+  <%= @proveedor.RUC %>
+</p>
+
+
+
+
+<%= link_to 'Editar', edit_proveedor_path(@proveedor) %> |
+<%= link_to 'Listado de Proveedores', proveedors_path %>

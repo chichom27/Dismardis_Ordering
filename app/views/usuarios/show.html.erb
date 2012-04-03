@@ -1,0 +1,110 @@
+
+
+<p>
+  <b>Username:</b>
+  <%= @usuario.Username %>
+</p>
+
+<!--
+<p>
+  <b>Password:</b>
+  <%= @usuario.Password %>
+</p>
+-->
+
+<p>
+    <h2>Datos Cliente<br /></h2>
+</p>
+
+<p>
+    <b>Codigo:</b>
+    <%= @usuario.Codigo %>
+</p>
+
+<% if @usuario.idTipoUsuario == 4 %>
+<p>
+    <b>Nombre del Negocio:</b>
+    <%= @usuario.NombreNegocio %>
+</p>
+
+<p>
+    <b>Direccion del Negocio:</b>
+    <%= @usuario.Direccion %>
+</p>
+
+<p>
+    <b>Referencia:</b>
+    <%= @usuario.Referencia %>
+</p>
+
+<p>
+    <b>Zona</b>
+    <%= @usuario.Zona %>
+</p>
+<% end %>
+
+<% if @usuario.idTipoUsuario != 1 && @usuario.idTipoUsuario != 2%>
+<p>
+    <b>Ciudad</b>
+    <%= @usuario.ciud.Nombre %>
+</p>
+
+<p>
+    <b>Provincia</b>
+    <%= @usuario.ciud.provincia.Nombre %>
+</p>
+<% end %>
+
+<p>
+    <b>Telefono:</b>
+    <%= @usuario.Telefono %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @usuario.Nombre %>
+</p>
+
+<p>
+  <b>Apellido:</b>
+  <%= @usuario.Apellido %>
+</p>
+
+<p>
+  <b>Cedula:</b>
+  <%= @usuario.Cedula %>
+</p>
+
+<% if @usuario.idTipoUsuario == 4 %>
+<p>
+  <b>Descuento:</b>
+  <%= @usuario.Descuento %>
+</p>
+<% end %>
+
+<p>
+  <b>Tipo de Usuario:</b>
+  <%= @usuario.tipoUser.Nombre %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @usuario.Email %>
+</p>
+
+<% if @usuario.idTipoUsuario == 4 %>
+<p>
+  <b>Observaciones:</b>
+  <%= @usuario.Observaciones %>
+</p>
+<% end %>
+<!-- 
+<p>
+	<%= @usuario.id %>
+	<%= session[:Usuario_id] %>
+	<%= if session[:Usuario_id] == @usuario.id then 'Yes' else 'No' end%>
+</p>
+-->
+
+<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
+<%= link_to 'Listado de Usuarios', usuarios_path %>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DisMardisOrdering</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+	<% if session[:Usuario_id] == nil%>
+	<p>
+		<%= link_to_unless_current "Log in", :action => "login", :controller => "usuarios"  %>
+		
+	</p>
+	
+	<% else %>
+	<p>
+		<%= link_to "Inicio",  :action => "index", :controller => "home"  %>
+		| 
+	 <%= link_to_unless_current "Productos", :action => "index", :controller => "productos"  %>
+	 | 
+	 <%= link_to_unless_current "Pedidos", :action => "index", :controller => "pedidos"  %>
+	 | 
+	 <%= link_to_unless_current "Proveedores", :action => "index", :controller => "proveedors"  %>
+	 | 
+	 
+	 <% if session[:Usuario_idTP] == 1  || session[:Usuario_idTP] == 2 %>
+	 
+	 	<%= link_to_unless_current "Usuarios", :action => "index", :controller => "usuarios"  %>
+	    | 
+	    <%= link_to_unless_current "Categorias", :action => "index", :controller => "categoria"  %>
+	    | 
+	    <%= link_to_unless_current "Familias", :action => "index", :controller => "familia"  %>
+	    | 
+	 
+	 <% end %>
+	 
+	 <% if session[:Usuario_idTP] == 1   %>
+	 
+	 	<%= link_to_unless_current "Ciudades", :action => "index", :controller => "ciudads"  %>
+	    | 
+	    <%= link_to_unless_current "Provincias", :action => "index", :controller => "provincia"  %>
+	    |
+	    <%= link_to_unless_current "Tipos Estados", :action => "index", :controller => "estado_pedidos"  %>
+	    | 
+	 
+	 <% end %>
+	 
+     <%= link_to_unless_current "Log out", :action => "logout", :controller => "usuarios"  %>
+	</p>
+	<% end %>
+	 
+	
+<p style="color: green"><%= flash[:notice] %></p>
+
+
+
+<%= yield %>
+
+<!--
+<% if ENV["RAILS_ENV"] == "development" %>
+
+
+<div id="debug">
+	
+	<fieldset id="session_debug_info" class="debug_info" ><legend>session</legend>
+		<%= debug(session)%>
+	</fieldset>
+</div>
+
+<% end %>
+-->
+
+</body>
+</html>

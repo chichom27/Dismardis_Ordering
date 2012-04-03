@@ -1,0 +1,29 @@
+<%= form_for(@familium) do |f| %>
+  <% if @familium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@familium.errors.count, "error") %> prohibited this familium from being saved:</h2>
+
+      <ul>
+      <% @familium.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Nombre %><br />
+    <%= f.text_field :Nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :Codigo %><br />
+    <%= f.text_field :Codigo %>
+  </div>
+  <div class="field">
+    <%= f.label :idCategoria %><br />
+    <%= f.number_field :idCategoria %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

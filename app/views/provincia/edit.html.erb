@@ -1,0 +1,19 @@
+<h1>Editar Provincia</h1>
+
+
+<%= form_for (@provincium) do |f| -%>
+	
+	  
+	<fieldset>
+		<legend><h2>Formulario</h2></legend>
+		<p>
+			<%= f.label 'Nombre' %><br />
+		    <%= f.text_field :Nombre %>
+		</p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Provincia" %></p>
+<% end %>
+
+<%= link_to 'Volver a '+@provincium.Nombre, @provincium %> |
+<%= link_to 'Listado de Provincias', provincia_path %>

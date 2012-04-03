@@ -1,0 +1,46 @@
+<h1>Editar Proveedor</h1>
+
+<%= form_for (@proveedor) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+	  <p>
+		<%= f.label 'Codigo' %><br />
+		<%= f.text_field :Codigo %>
+	  </p>
+      <p>
+	    <%= f.label 'Nombre' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+	  <p>
+	    <%= f.label 'Direccion' %><br />
+	    <%= f.text_field :Direccion %>
+	  </p>
+	  <p>
+	    <%= f.label 'Telefono' %><br />
+	    <%= f.text_field :Telefono %>
+	  </p>
+	  <p>
+		<%= f.label 'Contacto' %><br />
+	    <%= f.text_field :Contacto %>
+	  </p>
+	  <p>
+	    <%= f.label 'Telefono del Contacto' %><br />
+	    <%= f.text_field :TelContacto %>
+	  </p>
+	  <p>
+	    <%= f.label 'Email' %><br />
+	    <%= f.text_field :Email %>
+	  </p>
+	  <p>
+	    <%= f.label 'RUC' %><br />
+	    <%= f.text_field :RUC %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Proveedor" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @proveedor.Nombre, @proveedor %> |
+<%= link_to 'Listado de Proveedores', proveedors_path %>

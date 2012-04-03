@@ -1,0 +1,38 @@
+<h1>Pedido: <%= @pedido.Codigo %></h1>
+
+<p>
+  <b>Usuario:</b>
+  <%= @pedido.user.Username %>
+</p>
+
+<p>
+  <b>Codigo:</b>
+  <%= @pedido.Codigo %>
+</p>
+
+<p>
+  <b>Items:</b>
+  <p>
+	<table>
+	  <tr>
+	    <th>Producto</th>
+	    <th>Codigo</th>
+	    <th>Cantidad</th>
+	  </tr>
+	
+	<% @items.each do |item| %>
+	  <tr>
+	    <td><%= item.prod.Nombre %></td>
+	    <td><%= item.prod.Codigo %></td>
+	    
+	    <td><%= item.cantidad %></td>
+	  </tr>
+	<% end %>
+	</table>
+  </p>
+</p>
+
+
+
+<%= link_to 'Editar', edit_pedido_path(@pedido) %> |
+<%= link_to 'Atras', pedidos_path %>

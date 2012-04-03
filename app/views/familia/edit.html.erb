@@ -1,0 +1,27 @@
+<h1>Editar Familia</h1>
+
+<%= form_for (@familium) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+      <p>
+	    <%= f.label 'Nombre' %><br />
+	    <%= f.text_field :Nombre %>
+	  </p>
+	  <p>
+	    <%= f.label 'Codigo' %><br />
+	    <%= f.text_field :Codigo %>
+	  </p>
+	  <p>
+	    <%= f.label 'Categoria' %><br />
+	    <%= f.collection_select :idCategoria, Categorium.all, :id, :Nombre %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Familia" %></p>
+<% end %>
+
+<%= link_to 'Volver a ' + @familium.Nombre, @familium %> |
+<%= link_to 'Listado de Familias', familia_path %>
+

@@ -1,0 +1,57 @@
+
+
+<h1>Listado de Usuarios</h1>
+
+<table>
+  <tr>
+  	<th>Username</th>
+  	<th>Nombre Negocio</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Tipo Usuario</th>
+    <th></th>
+    
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+    
+    
+  </tr>
+
+<% @usuarios.each do |usuario| %>
+  <tr>
+  	<!--
+  	<% if usuario.NombreNegocio != nil %>
+	 
+	 	<td><%= link_to usuario.NombreNegocio, usuario %></td>
+	<% else %>
+	
+	    <td></td>
+	
+	<% end %>
+	-->
+  	
+  	<td><%= link_to usuario.Username, usuario %></td>
+  	<td><%= usuario.NombreNegocio %></td>
+    
+    <td><%= usuario.Nombre %></td>
+    <td><%= usuario.Apellido %></td>
+    <td><%= usuario.tipoUser.Nombre %></td>
+    <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+    
+    <% if session[:Usuario_idTP] == 1 && usuario.id != 1 %>
+	 
+	 	<td><%= link_to 'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+    
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Usuario', new_usuario_path %>

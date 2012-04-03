@@ -1,0 +1,19 @@
+<h1>Nueva Categoria</h1>
+
+<%= form_for :categorium, :url => categoria_path do |f| -%>
+	
+	  
+	  <fieldset>
+<legend><h2>Formulario</h2></legend>
+  
+  
+  <p>
+	<%= label_tag 'Nombre' %><br />
+    <%= f.text_field :Nombre %>
+  </p>
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Categoria' %></p>
+	<% end %>
+
+<%= link_to 'Listado de Categorias', categoria_path %>

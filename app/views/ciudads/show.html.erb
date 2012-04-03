@@ -1,0 +1,14 @@
+
+<p>
+  <b>Nombre:</b>
+  <%= @ciudad.Nombre %>
+</p>
+
+<p>
+  <b>Provincia:</b>
+  <%= @ciudad.provincia.Nombre %>
+</p>
+
+
+<%= link_to 'Editar', edit_ciudad_path(@ciudad) %> |
+<%= link_to 'Listado de Ciudades', ciudads_path %>

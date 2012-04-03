@@ -1,0 +1,34 @@
+<h1>Listado Familias</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Codigo</th>
+    <th>Categoria</th>
+    <th></th>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
+  </tr>
+
+<% @familia.each do |familium| %>
+  <tr>
+    <td><%= link_to familium.Nombre, familium %></td>
+    <td><%= familium.Codigo %></td>
+    <td><%= familium.categ.Nombre %></td>
+    
+    <td><%= link_to 'Editar', edit_familium_path(familium) %></td>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<td><%= link_to 'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Familium', new_familium_path %>

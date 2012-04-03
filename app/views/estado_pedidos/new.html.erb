@@ -1,0 +1,19 @@
+<h1>Nuevo Tipo de Estado de Pedido</h1>
+
+<%= form_for :estado_pedido, :url => estado_pedidos_path do |f| -%>
+	
+	  
+	  <fieldset>
+<legend><h2>Formulario</h2></legend>
+  
+  <p>
+	<%= label_tag 'Nombre' %><br />
+    <%= f.text_field :Nombre %>
+  </p>
+  
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Tipo de Estado' %></p>
+	<% end %>
+
+<%= link_to 'Listado de Estado de Pedidos', estado_pedidos_path %>

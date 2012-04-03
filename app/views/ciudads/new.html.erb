@@ -1,0 +1,23 @@
+<h1>Nueva Ciudad</h1>
+
+
+  <%= form_for :ciudad, :url => ciudads_path do |f| -%>
+	
+	  
+	<fieldset>
+		<legend><h2>Formulario</h2></legend>
+		<p>
+			<%= label_tag 'Nombre' %><br />
+		    <%= f.text_field :Nombre %>
+		</p>
+		<p>
+	  	  <%= label_tag 'Provincia' %><br />
+	  	  <%= f.collection_select :idProvincia, Provincium.all, :id, :Nombre %>
+	    </p>
+    </fieldset>
+  
+  <p><%= submit_tag 'Crear Ciudad' %></p>
+  <% end %>
+
+
+<%= link_to 'Listado de Ciudades', ciudads_path %>
