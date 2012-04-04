@@ -13,33 +13,8 @@
 
 ActiveRecord::Schema.define(:version => 20120402142025) do
 
-  create_table "Usuarios", :force => true do |t|
-    t.string   "Username"
-    t.string   "Password"
-    t.string   "Nombre"
-    t.string   "Apellido"
-    t.integer  "idEmpresa"
-    t.integer  "idAgencia"
-    t.integer  "idTipoUsuario"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "idFamilia"
-    t.string   "Codigo"
-    t.string   "NombreNegocio"
-    t.string   "Direccion"
-    t.string   "Referencia"
-    t.string   "Zona"
-    t.integer  "idCiudad"
-    t.integer  "Cedula"
-    t.text     "Observaciones"
-    t.decimal  "Descuento"
-    t.string   "Email"
-    t.string   "Telefono"
-  end
-
   create_table "agencia", :force => true do |t|
     t.string   "Nombre"
-    t.integer  "idEmpresa"
     t.string   "Codigo"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -105,8 +80,20 @@ ActiveRecord::Schema.define(:version => 20120402142025) do
     t.datetime "updated_at", :null => false
   end
 
-# Could not dump table "productos" because of following StandardError
-#   Unknown type 'bool' for column 'Estado'
+  create_table "productos", :force => true do |t|
+    t.string   "Nombre"
+    t.integer  "idEmpresa"
+    t.string   "Codigo"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "idFamilia"
+    t.decimal  "Precio"
+    t.integer  "idProveedor"
+    t.date     "FechaInicio"
+    t.date     "FechaCaducidad"
+    t.boolean  "Estado"
+    t.string   "Presentacion"
+  end
 
   create_table "proveedors", :force => true do |t|
     t.string   "Codigo"
@@ -141,6 +128,27 @@ ActiveRecord::Schema.define(:version => 20120402142025) do
     t.string   "Nombre"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "usuarios", :force => true do |t|
+    t.string   "Username"
+    t.string   "Password"
+    t.string   "Nombre"
+    t.string   "Apellido"
+    t.integer  "idTipoUsuario"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "Codigo"
+    t.string   "NombreNegocio"
+    t.string   "Direccion"
+    t.string   "Referencia"
+    t.string   "Zona"
+    t.integer  "idCiudad"
+    t.integer  "Cedula"
+    t.text     "Observaciones"
+    t.decimal  "Descuento"
+    t.string   "Email"
+    t.string   "Telefono"
   end
 
 end

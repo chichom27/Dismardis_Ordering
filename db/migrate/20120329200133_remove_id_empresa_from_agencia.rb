@@ -6,7 +6,7 @@ class RemoveIdEmpresaFromAgencia < ActiveRecord::Migration
   end
   
   def change
-    remove_column :Usuarios, :idEmpresa
+    remove_column :agencia, :idEmpresa
 
   end
 end

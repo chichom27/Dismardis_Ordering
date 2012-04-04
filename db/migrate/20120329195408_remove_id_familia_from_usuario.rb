@@ -6,7 +6,7 @@ class RemoveIdFamiliaFromUsuario < ActiveRecord::Migration
   end
   
   def change
-    remove_column :Usuarios, :idFamilia
+    remove_column :usuarios, :idFamilia
 
   end
 end
