@@ -22,7 +22,7 @@
     <td><%= link_to 'Editar', edit_familium_path(familium) %></td>
     <% if session[:Usuario_idTP] == 1 %>
 	 
-	 	<td><%= link_to 'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 	<td><%= link_to 'Borrar', familium, confirm: 'Esta seguro?', method: :delete %></td>
 	 
 	<% end %>
   </tr>
@@ -31,4 +31,4 @@
 
 <br />
 
-<%= link_to 'New Familium', new_familium_path %>
+<%= link_to 'Nueva Familia', new_familium_path %>
