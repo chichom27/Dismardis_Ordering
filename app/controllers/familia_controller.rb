@@ -25,6 +25,7 @@ class FamiliaController < ApplicationController
   # GET /familia/new.json
   def new
     @familium = Familium.new
+    @numCategs = Categorium.count
 
     respond_to do |format|
       format.html # new.html.erb

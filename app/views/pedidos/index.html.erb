@@ -4,12 +4,18 @@
   <tr>
     <th>Usuario</th>
     <th>Codigo</th>
+    <th>Fecha Pedido</th>
+    <th>Estado</th>
+    <th>Total</th>
   </tr>
 
 <% @pedidos.each do |pedido| %>
   <tr>
     <td><%= link_to pedido.user.Username, pedido %></td>
     <td><%= pedido.Codigo %></td>
+    <td><%= pedido.FechaEntrega %></td>
+    <td><%= pedido.pestado.Nombre %></td>
+    <td><%= pedido.Total %></td>
   </tr>
 <% end %>
 </table>

@@ -1,4 +1,4 @@
-<h1>New pedido</h1>
+<h1>Nuevo Pedido</h1>
 
 
 
@@ -6,26 +6,37 @@
 
 <p><%= label_tag 'Codigo' %><br/>
 <%= f.text_field :Codigo %></p>
+<!-- :readonly => true -->
+<%= f.hidden_field :FechaPedido, :value => "1/1/2012" %></p>
+<%= f.hidden_field :idEstado, :value => 1 %></p>
+<%= f.hidden_field :Total, :value => 0 %></p>
 
 
-<p><%= f.hidden_field :idUsuario, :value => session[:Usuario_id] %> </p>
+<p><%= f.hidden_field :id_usuario, :value => session[:Usuario_id] %> </p>
 
 
 <p>
 	
 	<table>
 	  <tr>
-	    <th>Producto</th>
+	  	<th>Categoria</th>
+	  	<th>Familia</th>
+	  	<th>Producto</th>
+	  	<th>Presentacion</th>
 	    <th>Codigo</th>
+	    <th>Precio</th>
 	    <th>Cantidad</th>
 	  </tr>
 	
 	<% @items.each do |item| %>
 	  <tr>
+	  	<td><%= item.prod.fam.categ.Nombre %></td>
+	  	<td><%= item.prod.fam.Nombre %></td>
 	    <td><%= item.prod.Nombre %></td>
+	    <td><%= item.prod.Presentacion %></td>
 	    <td><%= item.prod.Codigo %></td>
-	    
-	    <td><%= text_field_tag "items[#{item.prod.id}]", item.cantidad, :id => "items_#{item.prod.id}" %></td>
+	    <td><%= number_to_currency(item.prod.Precio, :precision => 2) %></td>
+	    <td><%= text_field_tag "items[#{item.prod.id}]", item.cantidad, :id => "items_#{item.prod.id}", :autocomplete => :off %></td>
 	  </tr>
 	<% end %>
 	</table>
@@ -36,4 +47,4 @@
 <% end -%>
 
 
-<%= link_to 'Atras', pedidos_path %>
+<%= link_to 'Listado de Pedidos', pedidos_path %>

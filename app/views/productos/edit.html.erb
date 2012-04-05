@@ -1,6 +1,52 @@
-<h1>Editing producto</h1>
+<h1>Editar Producto</h1>
 
-<%= render 'form' %>
+<%= form_for (@producto) do |f| -%>
+	
+	  
+	<fieldset>
+	  <legend><h2>Formulario</h2></legend>
+	  <p>
+		<%= label_tag 'Nombre' %><br />
+	    <%= f.text_field :Nombre , :autocomplete => :off%>
+	  </p>
+	  <p>
+		<%= f.label 'Codigo' %><br />
+		<%= f.text_field :Codigo , :autocomplete => :off%>
+	  </p>
+      <p>
+	    <%= label_tag 'Proveedor' %><br />
+	    <%= f.collection_select :idProveedor, Proveedor.all, :id, :Nombre %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Familia' %><br />
+	    <%= f.collection_select :idFamilia, Familium.all, :id, :Nombre %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Precio' %><br />
+	    <%= f.text_field :Precio , :autocomplete => :off%>
+	  </p>
+	  <p>
+	    <%= label_tag 'Estado' %><br />
+	    <%= f.check_box :Estado%> <%= label_tag 'Activo' %>
+	  </p>
+	  <p>
+	    <%= label_tag 'Presentacion' %><br />
+	    <%= f.text_field :Presentacion , :autocomplete => :off%>
+	  </p>
+	  
+	  <p>
+	    <%= label_tag 'Fecha de Inicio' %><br />
+	    <%= f.date_select :FechaInicio %>
+	  </p>
+	  
+	  <p>
+	    <%= label_tag 'Fecha de Caducidad' %><br />
+	    <%= f.date_select :FechaCaducidad %>
+	  </p>
+    </fieldset>
+  
+  <p><%= f.submit "Actualizar Producto" %></p>
+<% end %>
 
-<%= link_to 'Show', @producto %> |
-<%= link_to 'Back', productos_path %>
+<%= link_to 'Volver a ' + @producto.Nombre, @producto %> |
+<%= link_to 'Listado de Productoss', productos_path %>

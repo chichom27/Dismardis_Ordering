@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Producto: <%= @producto.Nombre %></h1>
 
@@ -8,15 +8,39 @@
 </p>
 
 <p>
-  <b>Empresa:</b>
-  <%= @producto.emp.Nombre %>
-</p>
-
-<p>
   <b>Codigo:</b>
   <%= @producto.Codigo %>
 </p>
 
+<p>
+  <b>Familia:</b>
+  <%= @producto.fam.Nombre %>
+</p>
+
+<p>
+  <b>Precio:</b>
+  <%= @producto.Precio %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <% if @producto.Estado %>
+  	Activo
+  <% else %>
+  	Desactivado
+  <% end %>
+</p>
+
+<p>
+  <b>Fecha de Inicio:</b>
+  <%= @producto.FechaInicio %>
+</p>
+
+<p>
+  <b>Fecha de Caducidad:</b>
+  <%= @producto.FechaCaducidad %>
+</p>
+
 
 <%= link_to 'Editar', edit_producto_path(@producto) %> |
-<%= link_to 'Atras', productos_path %>
+<%= link_to 'Listado de Productos', productos_path %>

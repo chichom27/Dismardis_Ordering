@@ -3,15 +3,31 @@
 <table>
   <tr>
     <th>Nombre</th>
-    <th>Empresa</th>
+    <th>Proveedor</th>
     <th>Codigo</th>
+    <th>Familia</th>
+    <th>Precio</th>
+    <th></th>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<th></th> 
+	 
+	<% end %>
   </tr>
 
 <% @productos.each do |producto| %>
   <tr>
     <td><%= link_to producto.Nombre, producto %></td>
-    <td><%= producto.emp.Nombre %></td>
+    <td><%= producto.prov.Nombre %></td>
     <td><%= producto.Codigo %></td>
+    <td><%= producto.fam.Nombre %></td>
+    <td><%= producto.Precio %></td>
+    <td><%= link_to 'Editar', edit_producto_path(producto) %></td>
+    <% if session[:Usuario_idTP] == 1 %>
+	 
+	 	<td><%= link_to 'Borrar', producto, confirm: 'Esta seguro?', method: :delete %></td>
+	 
+	<% end %>
   </tr>
 <% end %>
 </table>

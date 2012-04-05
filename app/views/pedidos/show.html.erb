@@ -11,28 +11,101 @@
 </p>
 
 <p>
+  <b>Estado:</b>
+  <%= @pedido.pestado.Nombre %>
+</p>
+
+<p>
+  <b>Fecha de Pedido:</b>
+  <%= @pedido.FechaPedido %>
+</p>
+
+<p>
+  <b>Fecha de Entrega:</b>
+  <%= @pedido.FechaEntrega %>
+</p>
+
+<p>
+  <b>Comentarios:</b>
+  <%= @pedido.Comentarios %>
+</p>
+
+<p>
   <b>Items:</b>
   <p>
 	<table>
 	  <tr>
-	    <th>Producto</th>
+	    <th>Categoria</th>
+	  	<th>Familia</th>
+	  	<th>Producto</th>
+	  	<th>Presentacion</th>
 	    <th>Codigo</th>
+	    <th>Precio</th>
 	    <th>Cantidad</th>
+	    <th>Total</th>
 	  </tr>
 	
 	<% @items.each do |item| %>
-	  <tr>
-	    <td><%= item.prod.Nombre %></td>
-	    <td><%= item.prod.Codigo %></td>
-	    
-	    <td><%= item.cantidad %></td>
-	  </tr>
+	  <% if item.cantidad > 0 %>
+		  <tr>
+		    <td><%= item.prod.fam.categ.Nombre %></td>
+		  	<td><%= item.prod.fam.Nombre %></td>
+		    <td><%= item.prod.Nombre %></td>
+		    <td><%= item.prod.Presentacion %></td>
+		    <td><%= item.prod.Codigo %></td>
+		    <td><%= number_to_currency(item.prod.Precio, :precision => 2) %></td>
+		    <td><%= item.cantidad %></td>
+		    <td><%= number_to_currency(item.cantidad.to_i * item.prod.Precio, :precision => 2) %></td>
+		    <% @sumTot += (item.cantidad.to_i * item.prod.Precio) %>
+		  </tr>
+	  <% end %>
 	<% end %>
+		  <tr>
+		    <td></td>
+		  	<td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td>Subtotal</td>
+		    <td><%= number_to_currency(@sumTot, :precision => 2) %></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		  	<td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td>Descuento</td>
+		    <td><%= number_to_percentage(@pedido.user.Descuento * 100, :precision => 2 ) %></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		  	<td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td>IVA</td>
+		    <td><%= number_to_currency(0, :precision => 2) %></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		  	<td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td></td>
+		    <td><b>Total</b></td>
+		    <td><%= @pedido.Total %></td>
+		  </tr>
 	</table>
+		
   </p>
 </p>
 
 
 
 <%= link_to 'Editar', edit_pedido_path(@pedido) %> |
-<%= link_to 'Atras', pedidos_path %>
+<%= link_to 'Listado de Pedidos', pedidos_path %>

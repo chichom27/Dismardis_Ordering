@@ -1,26 +1,30 @@
 <h1>Nueva Familia</h1>
 
-<%= form_for :familium, :url => familia_path do |f| -%>
-	
+  <% if @numCateg != 0 %>
+	    <%= form_for :familium, :url => familia_path do |f| -%>
+		    <fieldset>
+			<legend><h2>Formulario</h2></legend>
+			  
+			  <p>
+				<%= label_tag 'Nombre' %><br />
+			    <%= f.text_field :Nombre , :autocomplete => :off, :autofocus => true%>
+			  </p>
+			  <p>
+			    <%= label_tag 'Codigo' %><br />
+			    <%= f.text_field :Codigo , :autocomplete => :off%>
+			  </p>
+			  <p>
+			    <%= label_tag 'Categoria' %><br />
+			    <%= f.collection_select :idCategoria, Categorium.all, :id, :Nombre %>
+			  </p>
+			</fieldset>
 	  
-	  <fieldset>
-<legend><h2>Formulario</h2></legend>
-  
-  <p>
-	<%= label_tag 'Nombre' %><br />
-    <%= f.text_field :Nombre , :autocomplete => :off%>
-  </p>
-  <p>
-    <%= label_tag 'Codigo' %><br />
-    <%= f.text_field :Codigo , :autocomplete => :off%>
-  </p>
-  <p>
-    <%= label_tag 'Categoria' %><br />
-    <%= f.collection_select :idCategoria, Categorium.all, :id, :Nombre %>
-  </p>
-  </fieldset>
-  
-  <p><%= submit_tag 'Crear Familia' %></p>
-	<% end %>
+	  		<p><%= submit_tag 'Crear Familia' %></p>
+		<% end %>
+  <% else %>
+    Para crear una nueva familia por favor crear categorias primero.
+  <% end %>
+
+
 
 <%= link_to 'Listado de Familias', familia_path %>
