@@ -19,7 +19,7 @@
 
 <p>
   <b>Precio:</b>
-  <%= @producto.Precio %>
+  <%= number_to_currency(@producto.Precio , :precision => 2) %>
 </p>
 
 <p>

@@ -1,15 +1,31 @@
 <script>
 	
 $(function(){
-	$(".datepicker").datepicker( {showOn:'both'}  );
+	$(".datepicker").datepicker( {dateFormat: 'dd/mm/yy', showOn:'both'} );
+	
 });
+
+
+$(document).ready(function(){
+        var search = "#Precio";
+        var chars = $(search).attr('placeholder').split('');
+        $.each(chars, function(i, v){
+          setTimeout(function() {
+            $(search).val((chars.slice(0, i+1).join('')));
+          }, 100*i);
+        });
+      });
 </script>
 
 
 <h1>Nuevo Producto</h1>
 
+
 <% if @numProv != 0 && @numFami != 0 %>
   <%= form_for :producto, :url => productos_path do |f| -%>
+      <% @producto.errors.full_messages.each do |msg| %>
+	    <p><%= msg %></p>
+	  <% end %>
 	  <fieldset>
 		<legend><h2>Formulario</h2></legend>
 		  
@@ -31,7 +47,7 @@ $(function(){
 		  </p>
 		  <p>
 		    <%= label_tag 'Precio' %><br />
-		    <%= f.text_field :Precio , :autocomplete => :off%>
+		    <%= f.text_field :Precio , :autocomplete => :off , :placeholder => "0.00"%>
 		  </p>
 		  <p>
 		    <%= label_tag 'Estado' %><br />
@@ -47,7 +63,7 @@ $(function(){
 		  </p>
 		  <p>
 		    <%= label_tag 'Fecha de Caducidad' %><br />
-		    <%= f.text_field  :FechaCaducidad,  :class => :datepicker , :value => (DateTime.now + 14).strftime("%m/%d/%Y") %>
+		    <%= f.text_field  :FechaCaducidad,  :class => :datepicker , :value => (DateTime.now + 14).strftime("%d/%m/%Y") %>
 		  </p>
 
 	  
@@ -56,7 +72,8 @@ $(function(){
 	  <p><%= submit_tag 'Crear Producto' %></p>
 	<% end %>
 <% else %>
-	Para crear un nuevo producto por favor crear familias de producto y proveedores primero.
+	Para crear un nuevo producto por favor crear <%= link_to 'familias de producto', familia_path %> y <%= link_to 'proveedores', proveedors_path %> primero.
+	<br /><br /><br />
 <% end %>	
 
 

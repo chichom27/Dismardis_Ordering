@@ -63,7 +63,22 @@ class UsuariosController < ApplicationController
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(params[:usuario])
-
+    @usuario.codigo = (@usuario.Nombre[0,1] + @usuario.Apellido[0,3]).upcase
+    @codigos = Usuario.count(:all, :conditions => ["codigo LIKE ?" ,@usuario.codigo] )
+    
+    
+    
+    if @codigos > 0
+      @usuario.codigo = @usuario.codigo + Usuario.codigoHelper(@codigos)
+    end
+    
+    
+    if @codigos > 26
+      flash[:notice] = "Demasiados usuarios con este codigo, por favor contactese con el administrador del sistema." 
+      redirect_to  :action => "index", :controller => "usuarios" 
+      return  
+    end
+    
     respond_to do |format|
       if @usuario.save
         #Se quito ya que los usuarios no se registran, admin los crea
@@ -104,4 +119,45 @@ class UsuariosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def cambiar_password 
+    @usuario = Usuario.find(session[:Usuario_id]) 
+    if request.post?  #{@person.attributes.inspect}
+      
+      usuario = Usuario.find_by_Username_and_Password(@usuario.Username,params[:Usuario][:current_password])
+      if usuario
+        if (params[:Usuario][:password] == params[:Usuario][:password_confirmation])
+          usuario.Password = params[:Usuario][:password]
+          #return render :text => "The object is #{params[:Usuario][:current_password]}" +
+          #"<br>  #{params[:Usuario][:password]}"+
+          #"<br>  #{params[:Usuario][:password_confirmation]}"
+          respond_to do |format|
+            if usuario.update_attributes(:Password => params[:Usuario][:password])
+              
+              format.html { redirect_to usuario, notice: 'Su password fue actualizada existosamente.' }
+              format.json { head :no_content }
+              #flash[:notice] = "Se ha actualizado su password."
+              #redirect_to usuario
+            else
+              format.html { render action: "cambiar_password" }
+              format.json { render json: @usuario.errors, status: :unprocessable_entity }
+            end
+          end
+        else
+          flash[:notice] = "Passwords ingresadas no coinciden."
+          redirect_to  :action => "cambiar_password", :controller => "usuarios"  
+        end
+        
+        
+      else
+        @usuario.Password = nil
+        flash[:notice] = "Password erroneo"
+      end
+      
+      
+      
+    end 
+  end
+  #end cambiar_password
+   
 end

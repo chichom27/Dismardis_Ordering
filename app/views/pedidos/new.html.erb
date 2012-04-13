@@ -1,13 +1,30 @@
+
+<% @items = Item.find(:all, :conditions =>  ["Cantidad = ? ", -1]) 
+ @productos = Producto.find(:all) 
+ @productos.each do |producto|
+      item = Item.new
+      item.pedido_id = @pedido.id
+      item.producto_id = producto.id
+      item.cantidad = 0
+      @items << item
+    end %>
+
+
+
+
+
 <h1>Nuevo Pedido</h1>
 
 
 
 <%= form_for :pedido, :url => pedidos_path do |f| -%>
-
+      <% @pedido.errors.full_messages.each do |msg| %>
+	    <p><%= msg %></p>
+	  <% end %>
 <p><%= label_tag 'Codigo' %><br/>
 <%= f.text_field :Codigo %></p>
 <!-- :readonly => true -->
-<%= f.hidden_field :FechaPedido, :value => "1/1/2012" %></p>
+<%= f.hidden_field :FechaPedido, :value => DateTime.now.strftime("%d/%m/%Y") %></p>
 <%= f.hidden_field :idEstado, :value => 1 %></p>
 <%= f.hidden_field :Total, :value => 0 %></p>
 

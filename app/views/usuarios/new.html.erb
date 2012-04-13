@@ -1,8 +1,25 @@
+<script>
+	
+
+
+$(document).ready(function(){
+        var search = "#Descuento";
+        var chars = $(search).attr('placeholder').split('');
+        $.each(chars, function(i, v){
+          setTimeout(function() {
+            $(search).val((chars.slice(0, i+1).join('')));
+          }, 100*i);
+        });
+      });
+</script>
+
 <h1>Nuevo Usuario</h1>
 
 
 <%= form_for :usuario, :url => usuarios_path do |f| -%>
-	
+	<% @usuario.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
 	  
 	  <fieldset>
 <legend><h2>Formulario</h2></legend>
@@ -13,6 +30,7 @@
   </p>
   <p>
   	<%= f.hidden_field :Password, :value => 'password' %>
+  	<%= f.hidden_field :codigo, :value => '' %>
 	
 	<!--
 	<%= label_tag 'Password' %><br />
@@ -27,10 +45,7 @@
   <p>
     <h2>Datos Cliente<br /></h2>
   </p>
-  <p>
-    <%= label_tag 'Codigo' %><br />
-    <%= f.text_field :Codigo , :autocomplete => :off%>
-  </p>
+  
   <p>
     <%= label_tag 'Nombre del Negocio' %><br />
     <%= f.text_field :NombreNegocio , :autocomplete => :off%>
@@ -65,11 +80,11 @@
   </p>
   <p>
     <%= label_tag 'Cedula del Usuario' %><br />
-    <%= f.text_field :Cedula , :autocomplete => :off%>
+    <%= f.text_field :cedula , :autocomplete => :off%>
   </p>
   <p>
     <%= label_tag 'Descuento' %><br />
-    <%= f.text_field :Descuento , :autocomplete => :off%>
+    <%= f.text_field :Descuento , :autocomplete => :off, :placeholder => "0.00"%>   <!-- 15 <b>%</b>-->
   </p>
   <p>
   	<%= label_tag 'Tipo de Usuario' %><br />

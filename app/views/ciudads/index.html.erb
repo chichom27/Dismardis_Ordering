@@ -18,7 +18,7 @@
     
     <% if session[:Usuario_idTP] == 1 %>
 	 
-	 	<td><%= link_to 'Borrar', ciudad, confirm: 'Esta seguro?', method: :delete %></td>
+	 	<td><%= button_to  'Borrar', ciudad, confirm: 'Esta seguro?', method: :delete %></td>
 	 
 	<% end %>
     

@@ -7,7 +7,7 @@ class CreateProveedors < ActiveRecord::Migration
       t.string :Telefono
       t.string :Contacto
       t.string :TelContacto
-      t.string :RUC
+      t.string :ruc
 
       t.timestamps
     end

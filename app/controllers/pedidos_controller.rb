@@ -31,16 +31,10 @@ class PedidosController < ApplicationController
   # GET /pedidos/new.json
   def new
     @pedido = Pedido.new
-    @items = Item.find(:all, :conditions =>  ["Cantidad = ? ", -1])
-    @productos = Producto.find(:all)
     
-    @productos.each do |producto|
-      item = Item.new
-      item.pedido_id = @pedido.id
-      item.producto_id = producto.id
-      item.cantidad = 0
-      @items << item
-    end
+    
+    
+    
     
     respond_to do |format|
       format.html # new.html.erb
@@ -78,7 +72,7 @@ class PedidosController < ApplicationController
           format.html { render action: "new" }
           format.json { render json: @pedido.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
+        format.html { redirect_to @pedido, notice: 'El pedido fue creado exitosamente.' }
         format.json { render json: @pedido, status: :created, location: @pedido }
       else
         format.html { render action: "new" }
@@ -94,7 +88,7 @@ class PedidosController < ApplicationController
 
     respond_to do |format|
       if @pedido.update_attributes(params[:pedido])
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully updated.' }
+        format.html { redirect_to @pedido, notice: 'El pedido fue actualizado existosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

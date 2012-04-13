@@ -17,7 +17,7 @@
     <td><%= agencium.Codigo %></td>
     <td><%= link_to 'Show', agencium %></td>
     <td><%= link_to 'Edit', edit_agencium_path(agencium) %></td>
-    <td><%= link_to 'Destroy', agencium, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= button_to  'Destroy', agencium, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

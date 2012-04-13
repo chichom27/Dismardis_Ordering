@@ -1,4 +1,7 @@
 DisMardisOrdering::Application.routes.draw do
+  get "usuarios/cambiar_password"
+  post "usuarios/cambiar_password"
+  
   resources :estado_pedidos
 
   resources :provincia

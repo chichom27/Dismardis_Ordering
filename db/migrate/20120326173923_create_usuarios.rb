@@ -5,19 +5,22 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :Password
       t.string :Nombre
       t.string :Apellido
-      t.integer :idEmpresa
-      t.integer :idAgencia
       t.integer :idTipoUsuario
+      t.string :codigo
+      t.string :cedula
+      t.string :Telefono
+      t.string :Email
+      t.decimal :Descuento
+      t.text :Observaciones
+      t.integer :idCiudad
+      t.string :Direccion
+      t.string :Zona
+      t.string :Referencia
+      t.string :NombreNegocio
 
       t.timestamps
     end
     
-    Usuario.create :Username => 'admin', 
-                    :Password => 'password', 
-                    :Nombre => 'admin', 
-                    :Apellido => 'admin', 
-                    :idTipoUsuario => 1, 
-                    :idEmpresa => 1, 
-                    :idAgencia => 1
+    
   end
 end

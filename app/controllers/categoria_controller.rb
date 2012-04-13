@@ -44,7 +44,7 @@ class CategoriaController < ApplicationController
 
     respond_to do |format|
       if @categorium.save
-        format.html { redirect_to @categorium, notice: 'Categorium was successfully created.' }
+        format.html { redirect_to @categorium, notice: 'Categoria fue creada exitosamente.' }
         format.json { render json: @categorium, status: :created, location: @categorium }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class CategoriaController < ApplicationController
 
     respond_to do |format|
       if @categorium.update_attributes(params[:categorium])
-        format.html { redirect_to @categorium, notice: 'Categorium was successfully updated.' }
+        format.html { redirect_to @categorium, notice: 'Categoria fue actualizada existosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

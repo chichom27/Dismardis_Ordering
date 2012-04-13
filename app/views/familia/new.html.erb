@@ -1,6 +1,6 @@
 <h1>Nueva Familia</h1>
 
-  <% if @numCateg != 0 %>
+  <% if Categorium.count != 0 %>
 	    <%= form_for :familium, :url => familia_path do |f| -%>
 		    <fieldset>
 			<legend><h2>Formulario</h2></legend>
@@ -22,7 +22,7 @@
 	  		<p><%= submit_tag 'Crear Familia' %></p>
 		<% end %>
   <% else %>
-    Para crear una nueva familia por favor crear categorias primero.
+    Para crear una nueva familia por favor crear <%= link_to 'Categorias', categoria_path %> primero. <br /><br /><br />
   <% end %>
 
 

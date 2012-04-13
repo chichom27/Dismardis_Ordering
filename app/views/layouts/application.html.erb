@@ -63,8 +63,30 @@
 
 
 
-<%= yield %>
 
+	<% if session[:Usuario_id] == nil && !(request.env['PATH_INFO'].ends_with?('login')) %>
+		<h1>Dismardis</h1>
+			<br>
+			<br>
+	
+		<% if session[:Usuario_id] == nil %>
+		<p>
+			Bienvenidos al sitio web de pedidos para Dismardis.  Por favor iniciar la sesion antes de continuar.  
+		</p>
+		
+		<% else %>
+		<p>
+			Bienvenidos al sitio web de pedidos para Dismardis.  
+		</p>
+		<% end %>
+	
+	<% else %>
+	
+
+		<%= yield %>
+
+
+	<% end %>
 <!--
 <% if ENV["RAILS_ENV"] == "development" %>
 

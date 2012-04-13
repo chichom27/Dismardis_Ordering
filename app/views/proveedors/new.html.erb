@@ -1,7 +1,9 @@
 <h1>Nuevo Proveedor</h1>
 
 <%= form_for :proveedor, :url => proveedors_path do |f| -%>
-	
+	<% @proveedor.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
 	  
   <fieldset>
 	<legend><h2>Formulario</h2></legend>
@@ -36,7 +38,7 @@
 	  </p>
 	  <p>
 	    <%= label_tag 'RUC' %><br />
-	    <%= f.text_field :RUC , :autocomplete => :off%>
+	    <%= f.text_field :ruc , :autocomplete => :off%>
 	  </p>
 	  
   </fieldset>

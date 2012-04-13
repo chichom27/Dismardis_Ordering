@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405045548) do
+ActiveRecord::Schema.define(:version => 20120412231704) do
 
   create_table "agencia", :force => true do |t|
     t.string   "Nombre"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20120405045548) do
     t.string   "Telefono"
     t.string   "Contacto"
     t.string   "TelContacto"
-    t.string   "RUC"
+    t.string   "ruc"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "Email"
@@ -136,19 +136,19 @@ ActiveRecord::Schema.define(:version => 20120405045548) do
     t.string   "Nombre"
     t.string   "Apellido"
     t.integer  "idTipoUsuario"
+    t.string   "codigo"
+    t.string   "cedula"
+    t.string   "Telefono"
+    t.string   "Email"
+    t.decimal  "Descuento"
+    t.text     "Observaciones"
+    t.integer  "idCiudad"
+    t.string   "Direccion"
+    t.string   "Zona"
+    t.string   "Referencia"
+    t.string   "NombreNegocio"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "Codigo"
-    t.string   "NombreNegocio"
-    t.string   "Direccion"
-    t.string   "Referencia"
-    t.string   "Zona"
-    t.integer  "idCiudad"
-    t.integer  "Cedula"
-    t.text     "Observaciones"
-    t.decimal  "Descuento"
-    t.string   "Email"
-    t.string   "Telefono"
   end
 
 end

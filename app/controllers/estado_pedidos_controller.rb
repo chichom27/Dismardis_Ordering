@@ -44,7 +44,7 @@ class EstadoPedidosController < ApplicationController
 
     respond_to do |format|
       if @estado_pedido.save
-        format.html { redirect_to @estado_pedido, notice: 'Estado pedido was successfully created.' }
+        format.html { redirect_to @estado_pedido, notice: 'Estado pedido fue creado exitosamente.' }
         format.json { render json: @estado_pedido, status: :created, location: @estado_pedido }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class EstadoPedidosController < ApplicationController
 
     respond_to do |format|
       if @estado_pedido.update_attributes(params[:estado_pedido])
-        format.html { redirect_to @estado_pedido, notice: 'Estado pedido was successfully updated.' }
+        format.html { redirect_to @estado_pedido, notice: 'Estado pedido fue actualizado existosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -19,12 +19,12 @@
     <td><%= link_to proveedor.Codigo, proveedor %></td>
     <td><%= proveedor.Nombre %></td>
     <td><%= proveedor.Contacto %></td>
-    <td><%= proveedor.RUC %></td>
+    <td><%= proveedor.ruc %></td>
     
     <td><%= link_to 'Editar', edit_proveedor_path(proveedor) %></td>
     <% if session[:Usuario_idTP] == 1 %>
 	 
-	 	<td><%= link_to 'Borrar', proveedor, confirm: 'Esta seguro?', method: :delete %></td>
+	 	<td><%= button_to  'Borrar', proveedor, confirm: 'Esta seguro?', method: :delete %></td>
 	 
 	<% end %>
   </tr>
