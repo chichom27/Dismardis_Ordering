@@ -1,9 +1,15 @@
 class PedidosController < ApplicationController
+  before_filter :check_permissions
+  
   #@@items
   # GET /pedidos
   # GET /pedidos.json
   def index
-    @pedidos = Pedido.find(:all, :conditions =>  ["id_usuario = ? ", session[:Usuario_id]])
+    if session[:Usuario_idTP] == 4
+      @pedidos = Pedido.find(:all, :conditions =>  ["id_usuario = ? ", session[:Usuario_id]])
+    else
+      @pedidos = Pedido.all
+    end
     #@pedidos = Pedido.count( :conditions =>  ["idUsuario = ? ", session[:Usuario_id]])
     #Pedido.where('idUsuario = ?', session[:Usuario_id]).all
     #@pedidos = Pedido.all
@@ -50,8 +56,33 @@ class PedidosController < ApplicationController
   # POST /pedidos
   # POST /pedidos.json
   def create
+    @numPedidos = Pedido.count(:all, :conditions =>  ["id_usuario = ? ", session[:Usuario_id]])
+    @usuario = Usuario.find(session[:Usuario_id])
+    numPed_s = (@numPedidos + 1).to_s
+    
+    if ((@numPedidos + 1) > 99999)
+      #add more stuff here
+      return
+    end
+    
+    case numPed_s.length
+      when 1
+        numPed_s = "0000" + numPed_s 
+      when 2
+        numPed_s = "000" + numPed_s 
+      when 3
+        numPed_s = "00" + numPed_s 
+      when 4
+        numPed_s = "0" + numPed_s
+    end 
+    
+    params[:pedido][:Codigo] = @usuario.codigo + "-" + numPed_s
+    
     @pedido = Pedido.new(params[:pedido])
     @sumTot = 0
+    
+    
+    
     respond_to do |format|
       if @pedido.save
         params[:items].each do |item|
@@ -75,6 +106,7 @@ class PedidosController < ApplicationController
         format.html { redirect_to @pedido, notice: 'El pedido fue creado exitosamente.' }
         format.json { render json: @pedido, status: :created, location: @pedido }
       else
+        #render :action => "new"
         format.html { render action: "new" }
         format.json { render json: @pedido.errors, status: :unprocessable_entity }
       end
@@ -108,4 +140,32 @@ class PedidosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    def check_permissions
+      if session[:Usuario_idTP] != 4 && (self.action_name == 'new' || self.action_name == 'create')
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 3 && (self.action_name != 'show' && self.action_name != 'index')
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 4 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 4 && (self.action_name != 'index' && self.action_name != 'new' && self.action_name != 'create')
+        @pedido = Pedido.find(params[:id])
+        if @pedido.user.id.to_s != session[:Usuario_id].to_s
+          redirect_to  :controller => 'home', :action => 'forbidden'
+          return
+        end
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+    end
+    
 end

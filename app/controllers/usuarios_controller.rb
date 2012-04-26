@@ -1,4 +1,6 @@
 class UsuariosController < ApplicationController
+  before_filter :check_permissions
+  
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -123,7 +125,6 @@ class UsuariosController < ApplicationController
   def cambiar_password 
     @usuario = Usuario.find(session[:Usuario_id]) 
     if request.post?  #{@person.attributes.inspect}
-      
       usuario = Usuario.find_by_Username_and_Password(@usuario.Username,params[:Usuario][:current_password])
       if usuario
         if (params[:Usuario][:password] == params[:Usuario][:password_confirmation])
@@ -147,17 +148,33 @@ class UsuariosController < ApplicationController
           flash[:notice] = "Passwords ingresadas no coinciden."
           redirect_to  :action => "cambiar_password", :controller => "usuarios"  
         end
-        
-        
       else
         @usuario.Password = nil
         flash[:notice] = "Password erroneo"
       end
-      
-      
-      
     end 
   end
   #end cambiar_password
-   
+  
+  
+  private
+    def check_permissions
+      if session[:Usuario_idTP] == 3 && (self.action_name != 'show' && self.action_name != 'index')
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 4 && (self.action_name == 'destroy' || self.action_name == 'new' || self.action_name == 'create' || self.action_name == 'index' || self.action_name == 'edit')
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      else
+        if self.action_name != 'cambiar_password' && (session[:Usuario_id].to_s != params[:id].to_s)
+          redirect_to  :controller => 'home', :action => 'forbidden'
+          return
+        end
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+    end 
 end

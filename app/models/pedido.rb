@@ -6,7 +6,7 @@ class Pedido < ActiveRecord::Base
 
   validates :Codigo       ,  :length => {
                             :minimum   => 1,
-                            :maximum   => 6,
+                            :maximum   => 15,
                             :too_short => ": Debe de tener por lo menos %{count} letras.",
                             :too_long  => ": Debe de tener un maximo de %{count} letras."
                           },

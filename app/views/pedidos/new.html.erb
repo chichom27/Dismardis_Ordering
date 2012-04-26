@@ -7,9 +7,13 @@
       item.producto_id = producto.id
       item.cantidad = 0
       @items << item
-    end %>
-
-
+    end 
+ 
+ 
+ 
+ 
+    %>
+  
 
 
 
@@ -21,12 +25,12 @@
       <% @pedido.errors.full_messages.each do |msg| %>
 	    <p><%= msg %></p>
 	  <% end %>
-<p><%= label_tag 'Codigo' %><br/>
-<%= f.text_field :Codigo %></p>
+
 <!-- :readonly => true -->
-<%= f.hidden_field :FechaPedido, :value => DateTime.now.strftime("%d/%m/%Y") %></p>
-<%= f.hidden_field :idEstado, :value => 1 %></p>
-<%= f.hidden_field :Total, :value => 0 %></p>
+<p><%= f.hidden_field :Codigo, :value => "" %> </p>
+<p><%= f.hidden_field :FechaPedido, :value => DateTime.now.strftime("%d/%m/%Y") %></p>
+<p><%= f.hidden_field :idEstado, :value => 1 %></p>
+<p><%= f.hidden_field :Total, :value => 0 %></p>
 
 
 <p><%= f.hidden_field :id_usuario, :value => session[:Usuario_id] %> </p>
@@ -53,7 +57,7 @@
 	    <td><%= item.prod.Presentacion %></td>
 	    <td><%= item.prod.Codigo %></td>
 	    <td><%= number_to_currency(item.prod.Precio, :precision => 2) %></td>
-	    <td><%= text_field_tag "items[#{item.prod.id}]", item.cantidad, :id => "items_#{item.prod.id}", :autocomplete => :off %></td>
+	    <td><%= text_field_tag "items[#{item.prod.id}]", item.cantidad, :id => "items_#{item.prod.id}", :autocomplete => :off%></td>
 	  </tr>
 	<% end %>
 	</table>

@@ -93,11 +93,9 @@ class Usuario < ActiveRecord::Base
                             :too_long  => ": Debe de tener un maximo de %{count} numeros."
                           }
   validates :Descuento    , :numericality => { :message => ": %{value} No es un valor valido." },
-                          :length => {
-                            :minimum   => 0,
-                            :maximum   => 1,
-                            :too_short => ": Debe de tener un valor de por lo menos %{count}.",
-                            :too_long  => ": Debe de tener un valor de maximo de %{count}."
+                          :inclusion => {
+                            :in   => 0..1,
+                            :message   => ": Debe de tener un valor entre 0 y 1."
                           }, :if => :checkTipoUsuario?
 
   validates :cedula       , :numericality => { :message => ": %{value} No es un valor valido." },

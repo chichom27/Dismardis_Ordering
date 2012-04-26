@@ -1,7 +1,19 @@
+<script>
+	
+$(function(){
+	$(".datepicker").datepicker( {dateFormat: 'dd/mm/yy', showOn:'both'} );
+	
+});
+
+</script>
+
 <h1>Editar Producto</h1>
 
 <%= form_for (@producto) do |f| -%>
 	
+	<% @producto.errors.full_messages.each do |msg| %>
+	  <p><%= msg %></p>
+	<% end %>
 	  
 	<fieldset>
 	  <legend><h2>Formulario</h2></legend>
@@ -23,7 +35,7 @@
 	  </p>
 	  <p>
 	    <%= label_tag 'Precio' %><br />
-	    <%= f.text_field :Precio , :autocomplete => :off%>
+	    <%= f.text_field :Precio , :autocomplete => :off, :value => number_with_precision( @producto.Precio , :precision => 2)%>
 	  </p>
 	  <p>
 	    <%= label_tag 'Estado' %><br />
@@ -34,14 +46,14 @@
 	    <%= f.text_field :Presentacion , :autocomplete => :off%>
 	  </p>
 	  
-	  <p>
-	    <%= label_tag 'Fecha de Inicio' %><br />
-	    <%= f.date_select :FechaInicio %>
-	  </p>
 	  
 	  <p>
-	    <%= label_tag 'Fecha de Caducidad' %><br />
-	    <%= f.date_select :FechaCaducidad %>
+		    <%= label_tag 'Fecha de Inicio' %><br />
+		    <%= f.text_field  :FechaInicio,  :class => :datepicker , :value => (@producto.FechaInicio.blank? ? DateTime.now.strftime("%d/%m/%Y") : @producto.FechaInicio.strftime('%d/%m/%Y')) %>
+	  </p>
+ 	  <p>
+		    <%= label_tag 'Fecha de Caducidad' %><br />
+		    <%= f.text_field  :FechaCaducidad,  :class => :datepicker , :value => (@producto.FechaCaducidad.blank? ? (DateTime.now + 14).strftime("%d/%m/%Y") : @producto.FechaCaducidad.strftime('%d/%m/%Y'))%>
 	  </p>
     </fieldset>
   

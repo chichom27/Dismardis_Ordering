@@ -2,8 +2,8 @@
 
 <table>
   <tr>
-    <th>Usuario</th>
     <th>Codigo</th>
+    <th>Usuario</th>
     <th>Fecha Pedido</th>
     <th>Estado</th>
     <th>Total</th>
@@ -11,11 +11,11 @@
 
 <% @pedidos.each do |pedido| %>
   <tr>
-    <td><%= link_to pedido.user.Username, pedido %></td>
-    <td><%= pedido.Codigo %></td>
+    <td><%= link_to pedido.Codigo, pedido %></td>
+    <td><%= pedido.user.Username %></td>
     <td><%= pedido.FechaEntrega %></td>
     <td><%= pedido.pestado.Nombre %></td>
-    <td><%= pedido.Total %></td>
+    <td><%= number_to_currency(pedido.Total, :precision => 2) %></td>
   </tr>
 <% end %>
 </table>

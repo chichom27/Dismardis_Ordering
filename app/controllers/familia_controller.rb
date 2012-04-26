@@ -1,4 +1,6 @@
 class FamiliaController < ApplicationController
+  before_filter :check_permissions
+  
   # GET /familia
   # GET /familia.json
   def index
@@ -81,4 +83,16 @@ class FamiliaController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    def check_permissions
+      if session[:Usuario_idTP] == 3 || session[:Usuario_idTP] == 4
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+    end
 end

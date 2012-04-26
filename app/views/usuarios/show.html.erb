@@ -78,7 +78,7 @@
 <% if @usuario.idTipoUsuario == 4 %>
 <p>
   <b>Descuento:</b>
-  <%= @usuario.Descuento %>
+  <%= number_with_precision(@usuario.Descuento, :precision => 2) %>
 </p>
 <% end %>
 
@@ -92,11 +92,13 @@
   <%= @usuario.Email %>
 </p>
 
-<% if @usuario.idTipoUsuario == 4 %>
-<p>
-  <b>Observaciones:</b>
-  <%= @usuario.Observaciones %>
-</p>
+<% if session[:Usuario_idTP] != 4 %>
+	<% if @usuario.idTipoUsuario == 4 %>
+	<p>
+	  <b>Observaciones:</b>
+	  <%= @usuario.Observaciones %>
+	</p>
+	<% end %>
 <% end %>
 <!-- 
 <p>
@@ -106,6 +108,9 @@
 </p>
 -->
 
-<%= link_to 'Cambiar Password', :controller => "usuarios", :action => "cambiar_password" %> |
-<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
-<%= link_to 'Listado de Usuarios', usuarios_path %>
+<%= link_to 'Cambiar Password', :controller => "usuarios", :action => "cambiar_password" %> 
+<% if session[:Usuario_idTP] != 4 %>
+	|
+	<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
+	<%= link_to 'Listado de Usuarios', usuarios_path %>
+<% end %>

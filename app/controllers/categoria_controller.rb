@@ -1,4 +1,8 @@
 class CategoriaController < ApplicationController
+  before_filter :check_permissions
+
+  
+  
   # GET /categoria
   # GET /categoria.json
   def index
@@ -13,6 +17,7 @@ class CategoriaController < ApplicationController
   # GET /categoria/1
   # GET /categoria/1.json
   def show
+    
     @categorium = Categorium.find(params[:id])
 
     respond_to do |format|
@@ -80,4 +85,16 @@ class CategoriaController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    def check_permissions
+      if session[:Usuario_idTP] == 3 || session[:Usuario_idTP] == 4
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+    end
 end

@@ -19,7 +19,7 @@ DisMardisOrdering::Application.routes.draw do
   post "usuarios/login"
 
   resources :pedidos
-
+  resources :session
   resources :productos
 
   resources :agencia
@@ -29,6 +29,7 @@ DisMardisOrdering::Application.routes.draw do
   resources :usuarios
 
   get "home/index"
+  get "home/forbidden"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

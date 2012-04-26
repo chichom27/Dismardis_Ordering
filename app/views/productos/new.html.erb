@@ -26,6 +26,7 @@ $(document).ready(function(){
       <% @producto.errors.full_messages.each do |msg| %>
 	    <p><%= msg %></p>
 	  <% end %>
+	  <div>
 	  <fieldset>
 		<legend><h2>Formulario</h2></legend>
 		  
@@ -59,15 +60,16 @@ $(document).ready(function(){
 		  </p>
 		  <p>
 		    <%= label_tag 'Fecha de Inicio' %><br />
-		    <%= f.text_field  :FechaInicio,  :class => :datepicker , :value => DateTime.now.strftime("%d/%m/%Y") %>
+		    <%= f.text_field  :FechaInicio,  :class => :datepicker , :value => (@producto.FechaInicio.blank? ? DateTime.now.strftime("%d/%m/%Y") : @producto.FechaInicio.strftime('%d/%m/%Y')) %>
 		  </p>
 		  <p>
 		    <%= label_tag 'Fecha de Caducidad' %><br />
-		    <%= f.text_field  :FechaCaducidad,  :class => :datepicker , :value => (DateTime.now + 14).strftime("%d/%m/%Y") %>
+		    <%= f.text_field  :FechaCaducidad,  :class => :datepicker , :value => (@producto.FechaCaducidad.blank? ? (DateTime.now + 14).strftime("%d/%m/%Y") : @producto.FechaCaducidad.strftime('%d/%m/%Y'))%>
 		  </p>
 
 	  
 	  </fieldset>
+	  </div>
 	  
 	  <p><%= submit_tag 'Crear Producto' %></p>
 	<% end %>

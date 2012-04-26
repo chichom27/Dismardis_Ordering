@@ -1,4 +1,6 @@
 class ProductosController < ApplicationController
+  before_filter :check_permissions
+  
   # GET /productos
   # GET /productos.json
   def index
@@ -43,7 +45,9 @@ class ProductosController < ApplicationController
   # POST /productos.json
   def create
     @producto = Producto.new(params[:producto])
-
+    if ( /^[\d]+(\.[\d]+){0,1}$/ === @producto.Precio )
+      @producto.Precio = number_with_precision( @producto.Precio , :precision => 2)
+    end
     respond_to do |format|
       if @producto.save
         format.html { redirect_to @producto, notice: 'El producto fue creado exitosamente.' }
@@ -59,7 +63,9 @@ class ProductosController < ApplicationController
   # PUT /productos/1.json
   def update
     @producto = Producto.find(params[:id])
-
+    if ( /^[\d]+(\.[\d]+){0,1}$/ === @producto.Precio )
+      @producto.Precio = number_with_precision( @producto.Precio , :precision => 2)
+    end
     respond_to do |format|
       if @producto.update_attributes(params[:producto])
         format.html { redirect_to @producto, notice: 'El producto fue actualizado existosamente.' }
@@ -82,4 +88,16 @@ class ProductosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    def check_permissions
+      if (session[:Usuario_idTP] == 3 || session[:Usuario_idTP] == 4) && (self.action_name != 'index' && self.action_name != 'show')
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+    end
 end

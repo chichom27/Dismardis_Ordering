@@ -1,4 +1,6 @@
 class EstadoPedidosController < ApplicationController
+  before_filter :check_permissions
+  
   # GET /estado_pedidos
   # GET /estado_pedidos.json
   def index
@@ -80,4 +82,25 @@ class EstadoPedidosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  private
+    def check_permissions
+      if session[:Usuario_idTP] == 3 || session[:Usuario_idTP] == 4
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+        redirect_to  :controller => 'home', :action => 'forbidden'
+        return
+      end
+      #if session[:Usuario_idTP] == 2 && controller.action_name == 'new'
+      #  redirect_to  :controller => 'home', :action => 'forbidden'
+      #  return
+      #end
+      #if session[:Usuario_idTP] == 2 && controller.action_name == 'create'
+      #  redirect_to  :controller => 'home', :action => 'forbidden'
+      #  return
+      #end
+    end
 end

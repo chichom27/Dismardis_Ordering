@@ -11,3 +11,78 @@
  *= require_self
  *= require_tree .
 */
+
+/*
+form {
+  width:500px;
+}
+form fieldset {
+  clear:both;
+  margin:0;
+  padding:2px 0;
+}
+form fieldset label {
+  display:block;
+  width:150px;
+  float:left;
+}
+form fieldset input {
+  display:block;
+  width:340px;
+  float:right;
+}
+form p {
+  clear:both;
+  text-align:right;
+}
+*/
+
+form fieldset {
+    clear:both;
+	max-width: 500;
+}
+
+th
+{
+	background-color:#A8A8A8;
+	color:black;
+}
+table
+{
+	border-collapse:collapse;
+}
+table,th, td
+{
+	/*min-width:150px;*/
+	padding-right:10px;
+	padding-left: 10px;
+	border: 1px solid black;
+}
+
+/* DIVs */
+
+#MenuItem
+{
+	float:left;
+	padding-top:25px;
+	padding-bottom:25px;
+	padding-right:50px;
+	padding-left:50px;
+	
+}
+	
+#navcontainer
+{
+	
+}
+
+#navlist li
+{
+	display: inline;
+	list-style-type: none;
+	padding-right: 10px;
+	padding-left:  10px;
+	padding-top:7px;
+	padding-bottom:7px;
+	/*background-color:#A8A8A8;*/
+}
