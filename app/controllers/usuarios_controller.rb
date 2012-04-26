@@ -168,7 +168,7 @@ class UsuariosController < ApplicationController
           redirect_to  :controller => 'home', :action => 'forbidden'
           return
         else
-          if self.action_name != 'cambiar_password' && (session[:Usuario_id].to_s != params[:id].to_s)
+          if session[:Usuario_idTP] == 4 && (self.action_name != 'cambiar_password' && (session[:Usuario_id].to_s != params[:id].to_s))
             redirect_to  :controller => 'home', :action => 'forbidden'
             return
           end
