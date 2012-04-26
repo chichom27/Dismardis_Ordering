@@ -159,22 +159,24 @@ class UsuariosController < ApplicationController
   
   private
     def check_permissions
-      if session[:Usuario_idTP] == 3 && (self.action_name != 'show' && self.action_name != 'index')
-        redirect_to  :controller => 'home', :action => 'forbidden'
-        return
-      end
-      if session[:Usuario_idTP] == 4 && (self.action_name == 'destroy' || self.action_name == 'new' || self.action_name == 'create' || self.action_name == 'index' || self.action_name == 'edit')
-        redirect_to  :controller => 'home', :action => 'forbidden'
-        return
-      else
-        if self.action_name != 'cambiar_password' && (session[:Usuario_id].to_s != params[:id].to_s)
+      if (self.action_name != 'logout' && self.action_name != 'login')
+        if session[:Usuario_idTP] == 3 && (self.action_name != 'show' && self.action_name != 'index')
           redirect_to  :controller => 'home', :action => 'forbidden'
           return
         end
-      end
-      if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
-        redirect_to  :controller => 'home', :action => 'forbidden'
-        return
+        if session[:Usuario_idTP] == 4 && (self.action_name == 'destroy' || self.action_name == 'new' || self.action_name == 'create' || self.action_name == 'index' || self.action_name == 'edit')
+          redirect_to  :controller => 'home', :action => 'forbidden'
+          return
+        else
+          if self.action_name != 'cambiar_password' && (session[:Usuario_id].to_s != params[:id].to_s)
+            redirect_to  :controller => 'home', :action => 'forbidden'
+            return
+          end
+        end
+        if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+          redirect_to  :controller => 'home', :action => 'forbidden'
+          return
+        end
       end
     end 
 end
