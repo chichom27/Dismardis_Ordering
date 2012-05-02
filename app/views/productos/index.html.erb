@@ -7,6 +7,7 @@
     <th>Codigo</th>
     <th>Familia</th>
     <th>Precio</th>
+    <th>Estado</th>
     <th></th>
     <% if session[:Usuario_idTP] == 1 %>
 	 
@@ -22,6 +23,7 @@
     <td><%= producto.Codigo %></td>
     <td><%= producto.fam.Nombre %></td>
     <td><%= number_to_currency(producto.Precio , :precision => 2) %></td>
+    <td align="center"><% if producto.estado %> <%= image_tag "/assets/green.jpg" %> <% else %> <%= image_tag "/assets/red.jpg" %> <% end %> </td>
     <td><%= link_to 'Editar', edit_producto_path(producto) %></td>
     <% if session[:Usuario_idTP] == 1 %>
 	 
@@ -34,4 +36,6 @@
 
 <br />
 
-<%= link_to 'Nuevo Producto', new_producto_path %>
+<% if session[:Usuario_idTP] == 1 || session[:Usuario_idTP] == 2 %>
+	<%= link_to 'Nuevo Producto', new_producto_path %>
+<% end %>

@@ -39,11 +39,22 @@
     <td><%= usuario.Nombre %></td>
     <td><%= usuario.Apellido %></td>
     <td><%= usuario.tipoUser.Nombre %></td>
-    <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+    <% if session[:Usuario_idTP] == 2 || session[:Usuario_idTP] == 1    %>
+    	<% if session[:Usuario_idTP] == 2 && usuario.id == 1 %>
+    		<td></td>
+    	<% else %>	
+    		<td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+        <% end %>
+    <% else %>
+    	<td></td>
+    <% end %>
     
-    <% if session[:Usuario_idTP] == 1 && usuario.id != 1 %>
-	 
-	 	<td><%= button_to  'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+    <% if session[:Usuario_idTP] == 1  %>
+	 	<% if usuario.id != 1 %>
+	 		<td><%= button_to  'Borrar', usuario, confirm: 'Esta seguro?', method: :delete %></td>
+	 	<% else %>
+	 		<td></td>
+	 	<% end %>
 	 
 	<% end %>
     

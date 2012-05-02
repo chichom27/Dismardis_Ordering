@@ -37,7 +37,7 @@ class PedidosController < ApplicationController
   # GET /pedidos/new.json
   def new
     @pedido = Pedido.new
-    
+    @item3 = Item.new
     
     
     
@@ -52,6 +52,15 @@ class PedidosController < ApplicationController
   def edit
     @pedido = Pedido.find(params[:id])
   end
+  
+  # GET /pedidos/1/edit
+  def responder_pedido
+    @pedido = Pedido.find(params[:id])
+    @sumTot = 0
+    
+    @test1 = session[:Usuario_idTP] 
+    @test2 = self.action_name
+  end
 
   # POST /pedidos
   # POST /pedidos.json
@@ -59,7 +68,7 @@ class PedidosController < ApplicationController
     @numPedidos = Pedido.count(:all, :conditions =>  ["id_usuario = ? ", session[:Usuario_id]])
     @usuario = Usuario.find(session[:Usuario_id])
     numPed_s = (@numPedidos + 1).to_s
-    
+    @item3 = Item.new
     if ((@numPedidos + 1) > 99999)
       #add more stuff here
       return
@@ -80,36 +89,98 @@ class PedidosController < ApplicationController
     
     @pedido = Pedido.new(params[:pedido])
     @sumTot = 0
-    
+    @sumCant = 0
     
     
     respond_to do |format|
-      if @pedido.save
+      
+      checkGood = 0
+      
+      if @pedido.valid?
         params[:items].each do |item|
-          if item[1].to_i > 0
+          if item[1].to_i > 0  && checkGood == 0
             #item2 = Producto.first(:all, :conditions =>  ["id = ? ", item[:id]])
             #item2 = Item.new(Integer(item[:id]),session[:Usuario_id],Integer(item[:value]))
             item2 = Item.new
-            item2.pedido_id = @pedido.id
+            item2.pedido_id = 1 #@pedido.id
             item2.producto_id = item[0].to_i
             item2.cantidad = item[1].to_i
             @sumTot += (item2.cantidad * item2.prod.Precio)
-            item2.save
+            @item3 = item2
+            if !(@item3.valid?)
+              format.html { render action: "new" }
+              format.json { render json: item2.errors, status: :unprocessable_entity }
+              checkGood = 1
+              #return
+            end
+            @sumCant = @sumCant + item[1].to_i
           end
         end
         @sumTot = @sumTot - (@sumTot * @pedido.user.Descuento)
         params[:pedido][:Total] = @sumTot
-        if !(@pedido.update_attributes(params[:pedido]))
+        if !(@pedido.valid?)  && checkGood == 0
           format.html { render action: "new" }
           format.json { render json: @pedido.errors, status: :unprocessable_entity }
+          checkGood = 1
+          #return
         end
-        format.html { redirect_to @pedido, notice: 'El pedido fue creado exitosamente.' }
-        format.json { render json: @pedido, status: :created, location: @pedido }
+        
+        # Continue cause all is good
+        
+        #format.html { redirect_to @pedido, notice: 'El pedido fue creado exitosamente.' }
+        #format.json { render json: @pedido, status: :created, location: @pedido }
+        #return
       else
         #render :action => "new"
         format.html { render action: "new" }
         format.json { render json: @pedido.errors, status: :unprocessable_entity }
+        checkGood = 1
+        #return
       end
+      
+      
+      
+      if @sumCant.to_i == 0 && checkGood == 0
+        #@pedido.errors.add :Total, "Para completar una orden se debe pedir por lo menos un producto."
+        flash[:notice] = "Para completar una orden se debe pedir por lo menos un producto."
+        format.html { render  "new" }
+        #format.json { render json: @pedido.errors, status: :unprocessable_entity }
+        checkGood = 1
+      end
+      
+      
+      
+      ###############################################################################
+      if checkGood == 0
+        if @pedido.save
+          params[:items].each do |item|
+            if item[1].to_i > 0
+              #item2 = Producto.first(:all, :conditions =>  ["id = ? ", item[:id]])
+              #item2 = Item.new(Integer(item[:id]),session[:Usuario_id],Integer(item[:value]))
+              item2 = Item.new
+              item2.pedido_id = @pedido.id
+              item2.producto_id = item[0].to_i
+              item2.cantidad = item[1].to_i
+              @sumTot += (item2.cantidad * item2.prod.Precio)
+              item2.save
+            end
+          end
+          @sumTot = @sumTot - (@sumTot * @pedido.user.Descuento)
+          params[:pedido][:Total] = @sumTot
+          if !(@pedido.update_attributes(params[:pedido]))
+            format.html { render action: "new" }
+            format.json { render json: @pedido.errors, status: :unprocessable_entity }
+          end
+          format.html { redirect_to @pedido, notice: 'El pedido fue creado exitosamente.' }
+          format.json { render json: @pedido, status: :created, location: @pedido }
+        else
+          #render :action => "new"
+          format.html { render action: "new" }
+          format.json { render json: @pedido.errors, status: :unprocessable_entity }
+        end
+      end  
+        
+        
     end
   end
 
@@ -123,7 +194,7 @@ class PedidosController < ApplicationController
         format.html { redirect_to @pedido, notice: 'El pedido fue actualizado existosamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "responder_pedido" } # cambiar cuando haya el segundo
         format.json { render json: @pedido.errors, status: :unprocessable_entity }
       end
     end

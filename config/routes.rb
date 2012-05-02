@@ -19,6 +19,11 @@ DisMardisOrdering::Application.routes.draw do
   post "usuarios/login"
 
   resources :pedidos
+  #get "pedidos/:id/responder_pedido"
+  match 'pedidos/:id/responder_pedido', :to => 'pedidos#responder_pedido'
+  #post "pedidos/responder_pedido"
+  
+  
   resources :session
   resources :productos
 

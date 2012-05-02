@@ -1,6 +1,6 @@
 
 <% @items = Item.find(:all, :conditions =>  ["Cantidad = ? ", -1]) 
- @productos = Producto.find(:all) 
+ @productos = Producto.find(:all, :conditions =>  ["Estado = ? ", true]) 
  @productos.each do |producto|
       item = Item.new
       item.pedido_id = @pedido.id
@@ -19,10 +19,11 @@
 
 <h1>Nuevo Pedido</h1>
 
-
-
 <%= form_for :pedido, :url => pedidos_path do |f| -%>
       <% @pedido.errors.full_messages.each do |msg| %>
+	    <p><%= msg %></p>
+	  <% end %>
+	  <% @item3.errors.full_messages.each do |msg| %>
 	    <p><%= msg %></p>
 	  <% end %>
 
@@ -63,9 +64,9 @@
 	</table>
 	
 </p>
-   <% params[:items] = @items %>
+<% params[:items] = @items %>
 <p><%= submit_tag 'Realizar Pedido' %></p>
-<% end -%>
+<% end %>
 
 
 <%= link_to 'Listado de Pedidos', pedidos_path %>

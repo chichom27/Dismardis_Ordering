@@ -22,4 +22,6 @@
 
 <br />
 
-<%= link_to 'Nuevo Pedido', new_pedido_path %>
+<% if session[:Usuario_idTP] == 4 %>
+	<%= link_to 'Nuevo Pedido', new_pedido_path %>
+<% end %>
