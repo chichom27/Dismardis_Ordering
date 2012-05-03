@@ -15,7 +15,8 @@ class DataToUsuario < ActiveRecord::Migration
                     :Direccion => 'algo', 
                     :Zona => 'algo', 
                     :NombreNegocio => 'algo', 
-                    :Referencia => 'algo'
+                    :Referencia => 'algo', 
+                    :createdby => 1
   end
 
   def down

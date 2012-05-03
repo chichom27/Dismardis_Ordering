@@ -2,12 +2,14 @@ class Usuario < ActiveRecord::Base
   has_many :Pedido
   belongs_to :tipoUser, :class_name => "TipoUsuario", :foreign_key => "idTipoUsuario"
   belongs_to :ciud, :class_name => "Ciudad", :foreign_key => "idCiudad"
+  belongs_to :creator, :class_name => "Usuario", :foreign_key => "createdby"
   
   attr_accessor :current_password
   attr_accessor :password
   attr_accessor :password_confirmation
   
   #validate :checkDescuento, :if => :checkTipoUsuario?
+  validates :createdby     ,:presence => { :message => ": No puede ser ingresado como en blanco." }
   validates :Username     ,  :length => {
                             :minimum   => 5,
                             :maximum   => 16,

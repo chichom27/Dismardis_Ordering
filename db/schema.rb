@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(:version => 20120412231704) do
     t.integer  "idProveedor"
     t.date     "FechaInicio"
     t.date     "FechaCaducidad"
-    t.boolean  "Estado"
+    t.boolean  "estado"
     t.string   "Presentacion"
   end
 
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20120412231704) do
     t.string   "Zona"
     t.string   "Referencia"
     t.string   "NombreNegocio"
+    t.integer  "createdby",     :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

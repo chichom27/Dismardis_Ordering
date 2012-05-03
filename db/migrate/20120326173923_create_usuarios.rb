@@ -17,6 +17,7 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :Zona
       t.string :Referencia
       t.string :NombreNegocio
+      t.integer :createdby      , :null => false
 
       t.timestamps
     end

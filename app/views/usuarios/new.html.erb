@@ -31,6 +31,7 @@ $(document).ready(function(){
   <p>
   	<%= f.hidden_field :Password, :value => 'password' %>
   	<%= f.hidden_field :codigo, :value => '' %>
+  	<%= f.hidden_field :createdby, :value => session[:Usuario_id].to_i %>
 	
 	<!--
 	<%= label_tag 'Password' %><br />

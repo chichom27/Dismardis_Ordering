@@ -100,6 +100,13 @@
 	</p>
 	<% end %>
 <% end %>
+
+<% if session[:Usuario_idTP] != 4 %>
+	<p>
+	  <b>Creado Por:</b>
+	  <%= @usuario.createdby.Username %>
+	</p>
+<% end %>
 <!-- 
 <p>
 	<%= @usuario.id %>
