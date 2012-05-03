@@ -57,5 +57,11 @@ module DisMardisOrdering
     config.assets.version = '1.0'
     # Test SSL Force 
     # config.force_ssl = true
+    
+    config.action_mailer.delivery_method = :smtp
+
+
+
+    config.action_mailer.raise_delivery_errors = true
   end
 end
