@@ -10,6 +10,6 @@ class UsuarioMailer < ActionMailer::Base
   def cambio_password_email(usuario)
     @usuario = usuario
     @url  = "http://www.dismardis.com/login"
-    mail(:to => usuario.Email, :subject => "Cambio de Contraseña")
+    mail(:to => usuario.Email, :subject => "Cambio de Password")
   end
 end

@@ -83,7 +83,7 @@ class UsuariosController < ApplicationController
     
     respond_to do |format|
       if @usuario.save
-        #UsuarioMailer.welcome_email(@usuario).deliver
+        UsuarioMailer.welcome_email(@usuario).deliver
         #Se quito ya que los usuarios no se registran, admin los crea
         #session[:Usuario_id] = @usuario.id
         format.html { redirect_to @usuario, notice: 'Usuario fue creado exitosamente.' }
@@ -135,7 +135,7 @@ class UsuariosController < ApplicationController
           #"<br>  #{params[:Usuario][:password_confirmation]}"
           respond_to do |format|
             if usuario.update_attributes(:Password => params[:Usuario][:password])
-              #UsuarioMailer.cambio_password_email(@usuario).deliver
+              UsuarioMailer.cambio_password_email(@usuario).deliver
               format.html { redirect_to usuario, notice: 'Su password fue actualizada existosamente.' }
               format.json { head :no_content }
               #flash[:notice] = "Se ha actualizado su password."
