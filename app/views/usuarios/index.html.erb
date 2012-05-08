@@ -64,5 +64,19 @@
 </table>
 
 <br />
-
-<%= link_to 'Nuevo Usuario', new_usuario_path %>
+<% if session[:Usuario_idTP] == 1 %>
+	<p>
+		<%= link_to 'Nuevo Usuario', new_usuario_path %>
+	</p>
+<% end %>
+<% if session[:Usuario_idTP] == 1 || session[:Usuario_idTP] == 2 %>
+	<p>
+		<%= link_to 'Nuevo Gerente', :action => 'nuevo_gerente' %>
+	</p>
+	<p>
+		<%= link_to 'Nuevo Cajero', :action => 'nuevo_cajero' %>
+	</p>
+	<p>
+		<%= link_to 'Nuevo Cliente', :action => 'nuevo_cliente' %>
+	</p>
+<% end %>

@@ -4,7 +4,13 @@ class ProductosController < ApplicationController
   # GET /productos
   # GET /productos.json
   def index
-    @productos = Producto.all
+    #@productos
+
+    if session[:Usuario_idTP] == 1 ||  session[:Usuario_idTP] == 2
+      @productos = Producto.all
+    else
+      @productos = Producto.find(:all, :conditions => ["estado = ?" , true ] )
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,7 +56,7 @@ class ProductosController < ApplicationController
     end
     respond_to do |format|
       if @producto.save
-        format.html { redirect_to @producto, notice: 'El producto fue creado exitosamente.' }
+        format.html { redirect_to productos_path, notice: 'El producto fue creado exitosamente.' }
         format.json { render json: @producto, status: :created, location: @producto }
       else
         format.html { render action: "new" }

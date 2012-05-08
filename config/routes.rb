@@ -1,5 +1,5 @@
 DisMardisOrdering::Application.routes.draw do
-  get "usuarios/cambiar_password"
+  get  "usuarios/cambiar_password"
   post "usuarios/cambiar_password"
   
   resources :estado_pedidos
@@ -14,9 +14,17 @@ DisMardisOrdering::Application.routes.draw do
 
   resources :proveedors
 
-  get "usuarios/login"
-  get "usuarios/logout"
+  get  "usuarios/login"
   post "usuarios/login"
+  
+  get  "usuarios/logout"
+  
+  get  "usuarios/nuevo_gerente"
+  post "usuarios/nuevo_gerente"
+  get  "usuarios/nuevo_cajero"
+  post "usuarios/nuevo_cajero"
+  get  "usuarios/nuevo_cliente"
+  post "usuarios/nuevo_cliente"
 
   resources :pedidos
   #get "pedidos/:id/responder_pedido"
@@ -33,8 +41,8 @@ DisMardisOrdering::Application.routes.draw do
 
   resources :usuarios
 
-  get "home/index"
-  get "home/forbidden"
+  get  "home/index"
+  get  "home/forbidden"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

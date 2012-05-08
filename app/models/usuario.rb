@@ -20,9 +20,7 @@ class Usuario < ActiveRecord::Base
                           :uniqueness => { :case_sensitive => false ,  :message => ": No es unico." }
   validates :Password     ,  :length => {
                             :minimum   => 5,
-                            :maximum   => 16,
-                            :too_short => ": Debe de tener por lo menos %{count} letras.",
-                            :too_long  => ": Debe de tener un maximo de %{count} letras."
+                            :too_short => ": Debe de tener por lo menos %{count} letras."
                           },
                           :presence => { :message => ": No puede ser ingresado como en blanco." }
   validates :Nombre       ,  :length => {

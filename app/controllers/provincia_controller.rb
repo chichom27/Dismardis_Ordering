@@ -46,7 +46,7 @@ class ProvinciaController < ApplicationController
 
     respond_to do |format|
       if @provincium.save
-        format.html { redirect_to @provincium, notice: 'Provincia fue creada exitosamente.' }
+        format.html { redirect_to provincia_path, notice: 'Provincia fue creada exitosamente.' }
         format.json { render json: @provincium, status: :created, location: @provincium }
       else
         format.html { render action: "new" }

@@ -1,7 +1,7 @@
 class CreateProveedors < ActiveRecord::Migration
   def change
     create_table :proveedors do |t|
-      t.string :Codigo
+      t.string :codigo
       t.string :Nombre
       t.string :Direccion
       t.string :Telefono

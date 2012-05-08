@@ -77,8 +77,8 @@
 		    <td></td>
 		    <td></td>
 		    <td></td>
-		    <td>Descuento</td>
-		    <td><%= number_to_percentage(@pedido.user.Descuento * 100, :precision => 2 ) %></td>
+		    <td>Descuento (<%= number_to_percentage(@pedido.user.Descuento * 100, :precision => 2 ) %> &#37;)</td>
+		    <td><%= number_to_currency(@pedido.user.Descuento * @sumTot, :precision => 2 ) %></td>
 		  </tr>
 		  <tr>
 		    <td></td>
@@ -87,7 +87,7 @@
 		    <td></td>
 		    <td></td>
 		    <td></td>
-		    <td>IVA</td>
+		    <td>IVA (12.00&#37;)</td>
 		    <td><%= number_to_currency(0, :precision => 2) %></td>
 		  </tr>
 		  <tr>

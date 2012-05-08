@@ -7,11 +7,7 @@
 	  
   <fieldset>
 	<legend><h2>Formulario</h2></legend>
-	  
-	  <p>
-	    <%= label_tag 'Codigo' %><br />
-	    <%= f.text_field :Codigo , :autocomplete => :off, :autofocus => true%>
-	  </p>
+	  <%= f.hidden_field :codigo, :value => '' %>
 	  <p>
 	    <%= label_tag 'Nombre' %><br />
 	    <%= f.text_field :Nombre , :autocomplete => :off%>

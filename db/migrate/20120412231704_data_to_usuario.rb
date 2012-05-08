@@ -1,7 +1,9 @@
 class DataToUsuario < ActiveRecord::Migration
+  require 'digest/sha1'
+  
   def up
     Usuario.create  :Username => 'admin', 
-                    :Password => 'password', 
+                    :Password => Digest::SHA1.hexdigest('password'), 
                     :Nombre => 'admin', 
                     :Apellido => 'admin', 
                     :idTipoUsuario => 1, 

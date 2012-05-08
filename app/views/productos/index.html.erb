@@ -6,9 +6,12 @@
     <th>Proveedor</th>
     <th>Codigo</th>
     <th>Familia</th>
-    <th>Precio</th>
-    <th>Estado</th>
-    <th></th>
+    <th>Precio (PVP)</th>
+    
+    <% if session[:Usuario_idTP] == 1 || session[:Usuario_idTP] == 2 %>
+    	<th>Estado</th>
+    	<th></th>
+    <% end %>
     <% if session[:Usuario_idTP] == 1 %>
 	 
 	 	<th></th> 
@@ -23,8 +26,11 @@
     <td><%= producto.Codigo %></td>
     <td><%= producto.fam.Nombre %></td>
     <td><%= number_to_currency(producto.Precio , :precision => 2) %></td>
-    <td align="center"><% if producto.estado %> <%= image_tag "/assets/green.jpg" %> <% else %> <%= image_tag "/assets/red.jpg" %> <% end %> </td>
-    <td><%= link_to 'Editar', edit_producto_path(producto) %></td>
+    
+    <% if session[:Usuario_idTP] == 1 ||  session[:Usuario_idTP] == 2 %>
+    	<td align="center"><% if producto.estado %> <%= image_tag "/assets/green.jpg" %> <% else %> <%= image_tag "/assets/red.jpg" %> <% end %> </td>
+    	<td><%= link_to 'Editar', edit_producto_path(producto) %></td>
+    <% end %>
     <% if session[:Usuario_idTP] == 1 %>
 	 
 	 	<td><%= button_to  'Borrar', producto, confirm: 'Esta seguro?', method: :delete %></td>

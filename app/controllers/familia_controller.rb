@@ -47,7 +47,7 @@ class FamiliaController < ApplicationController
 
     respond_to do |format|
       if @familium.save
-        format.html { redirect_to @familium, notice: 'Familia fue creada exitosamente.' }
+        format.html { redirect_to familia_path, notice: 'Familia fue creada exitosamente.' }
         format.json { render json: @familium, status: :created, location: @familium }
       else
         format.html { render action: "new" }

@@ -46,7 +46,7 @@ class CiudadsController < ApplicationController
 
     respond_to do |format|
       if @ciudad.save
-        format.html { redirect_to @ciudad, notice: 'Ciudad fue creada exitosamente.' }
+        format.html { redirect_to ciudads_path, notice: 'Ciudad fue creada exitosamente.' }
         format.json { render json: @ciudad, status: :created, location: @ciudad }
       else
         format.html { render action: "new" }

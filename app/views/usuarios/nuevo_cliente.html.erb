@@ -13,7 +13,7 @@ $(document).ready(function(){
       });
 </script>
 
-<h1>Nuevo Usuario</h1>
+<h1>Nuevo Cliente</h1>
 
 
 <%= form_for :usuario, :url => usuarios_path do |f| -%>
@@ -33,18 +33,10 @@ $(document).ready(function(){
   	<%= f.hidden_field :codigo, :value => '' %>
   	<%= f.hidden_field :createdby, :value => session[:Usuario_id].to_i %>
 	
-	<!--
-	<%= label_tag 'Password' %><br />
-	<%= f.password_field :Password %><br />
-	<br /><label for="password_confirmation">Confirm Password</label><br />
-	<%= f.password_field :password_confirmation %>
-	
-	TIENE QUE agregar a un link en email al usuario final
-	
-	-->
+	<%= f.hidden_field :idTipoUsuario, :value => 4 %>
   </p>
   <p>
-    <h2>Datos Cliente<br /></h2>
+    <h2>Datos del Cliente<br /></h2>
   </p>
   
   <p>
@@ -87,10 +79,7 @@ $(document).ready(function(){
     <%= label_tag 'Descuento' %><br />
     <%= f.text_field :Descuento , :autocomplete => :off, :placeholder => "0.00"%>   <!-- 15 <b>%</b>-->
   </p>
-  <p>
-  	<%= label_tag 'Tipo de Usuario' %><br />
-  	<%= f.collection_select :idTipoUsuario, TipoUsuario.find(:all, :conditions =>  ["id <> ? ", 1]), :id, :Nombre %>
-  </p>
+
   <p>
 	<%= label_tag 'Email' %><br />
 	<%= f.text_field :Email , :autocomplete => :off%>
@@ -98,14 +87,6 @@ $(document).ready(function(){
   <p>
     <%= label_tag 'Observaciones' %><br />
     <%= f.text_area :Observaciones %>
-  </p>
-  
-  <p>
-  	<!--
-    <%= f.hidden_field :idEmpresa, :value => 1 %>
-    <%= f.hidden_field :idAgencia, :value => 1 %>
-    <%= f.hidden_field :idTipoUsuario, :value => 1 %>
-    -->
   </p>
   </fieldset>
   

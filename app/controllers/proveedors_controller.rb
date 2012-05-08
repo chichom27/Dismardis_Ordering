@@ -4,7 +4,9 @@ class ProveedorsController < ApplicationController
   # GET /proveedors
   # GET /proveedors.json
   def index
-    @proveedors = Proveedor.all
+    
+      @proveedors = Proveedor.all
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,10 +45,26 @@ class ProveedorsController < ApplicationController
   # POST /proveedors.json
   def create
     @proveedor = Proveedor.new(params[:proveedor])
-
+    
+    @proveedor.codigo = (@proveedor.Nombre[0,3]).upcase
+    @codigos = Proveedor.count(:all, :conditions => ["codigo LIKE ?" ,@proveedor.codigo] )
+    
+    
+    
+    if @codigos > 0
+      @proveedor.codigo = @proveedor.codigo + Proveedor.codigoHelper(@codigos)
+    end
+    
+    
+    if @codigos > 26
+      flash[:notice] = "Demasiados proveedores con este codigo, por favor contactese con el administrador del sistema." 
+      redirect_to  :action => "index", :controller => "proveedors" 
+      return  
+    end
+    
     respond_to do |format|
       if @proveedor.save
-        format.html { redirect_to @proveedor, notice: 'Proveedor fue creado exitosamente.' }
+        format.html { redirect_to proveedors_path, notice: 'Proveedor fue creado exitosamente.' }
         format.json { render json: @proveedor, status: :created, location: @proveedor }
       else
         format.html { render action: "new" }

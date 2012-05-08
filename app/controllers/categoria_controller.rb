@@ -65,7 +65,7 @@ class CategoriaController < ApplicationController
 
     respond_to do |format|
       if @categorium.update_attributes(params[:categorium])
-        format.html { redirect_to @categorium, notice: 'Categoria fue actualizada existosamente.' }
+        format.html { redirect_to categoria_path , notice: 'Categoria fue actualizada existosamente.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

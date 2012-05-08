@@ -46,7 +46,7 @@ class TipoUsuariosController < ApplicationController
 
     respond_to do |format|
       if @tipo_usuario.save
-        format.html { redirect_to @tipo_usuario, notice: 'Tipo usuario fue creado exitosamente.' }
+        format.html { redirect_to tipo_usuarios_path, notice: 'Tipo usuario fue creado exitosamente.' }
         format.json { render json: @tipo_usuario, status: :created, location: @tipo_usuario }
       else
         format.html { render action: "new" }

@@ -1,0 +1,62 @@
+
+<h1>Nuevo Cajero</h1>
+
+
+<%= form_for :usuario, :url => usuarios_path do |f| -%>
+	<% @usuario.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+	  
+  <fieldset>
+	    <legend><h2>Formulario</h2></legend>
+  
+  <p>
+    <%= label_tag 'Username' %><br />
+    <%= f.text_field :Username , :autocomplete => :off%>
+  </p>
+  <p>
+  	<%= f.hidden_field :Password, :value => SecureRandom.hex(5) %>
+  	<%= f.hidden_field :codigo, :value => '' %>
+  	<%= f.hidden_field :createdby, :value => session[:Usuario_id].to_i %>
+	
+	<%= f.hidden_field :NombreNegocio, :value => '' %>
+	<%= f.hidden_field :Direccion, :value => '' %>
+	<%= f.hidden_field :Referencia, :value => '' %>
+	<%= f.hidden_field :Zona, :value => '' %>
+	<%= f.hidden_field :Descuento, :value => 0 %>
+	<%= f.hidden_field :Observaciones, :value => '' %>
+	<%= f.hidden_field :idTipoUsuario, :value => 3 %>
+  </p>
+  <p>
+    <h2>Datos del Cajero<br /></h2>
+  </p>
+  <p>
+	<%= label_tag 'Nombre del Usuario' %><br />
+    <%= f.text_field :Nombre , :autocomplete => :off%>
+  </p>
+  <p>
+    <%= label_tag 'Apellido del Usuario' %><br />
+    <%= f.text_field :Apellido , :autocomplete => :off%>
+  </p>
+  <p>
+    <%= label_tag 'Ciudad' %><br />
+    <%= f.collection_select :idCiudad, Ciudad.all, :id, :Nombre %>
+  </p>
+  <p>
+    <%= label_tag 'Telefono' %><br />
+    <%= f.text_field :Telefono , :autocomplete => :off%>
+  </p>
+  <p>
+    <%= label_tag 'Cedula del Usuario' %><br />
+    <%= f.text_field :cedula , :autocomplete => :off%>
+  </p>
+  <p>
+	<%= label_tag 'Email' %><br />
+	<%= f.text_field :Email , :autocomplete => :off%>
+  </p>
+  </fieldset>
+  
+  <p><%= submit_tag 'Crear Cajero' %></p>
+	<% end %>
+
+<%= link_to 'Listado de Usuarios', usuarios_path %>

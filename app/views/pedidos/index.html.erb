@@ -9,7 +9,7 @@
     <th>Total</th>
   </tr>
 
-<% @pedidos.each do |pedido| %>
+  <% @pedidos.each do |pedido| %>
   <tr>
     <td><%= link_to pedido.Codigo, pedido %></td>
     <td><%= pedido.user.Username %></td>

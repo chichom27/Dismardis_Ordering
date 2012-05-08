@@ -1,7 +1,7 @@
 class Proveedor < ActiveRecord::Base
 
 
-  validates :Codigo       ,  :length => {
+  validates :codigo       ,  :length => {
                             :minimum   => 2,
                             :maximum   => 6,
                             :too_short => ": Debe de tener por lo menos %{count} letras.",
@@ -186,4 +186,62 @@ class Proveedor < ActiveRecord::Base
         end
         return true
       end
+      
+      
+  def self.codigoHelper(inc_number)
+    case inc_number.to_s
+      when "1"
+        return "A"
+      when "2"
+        return "B"
+      when "3"
+        return "C"
+      when "4"
+        return "D"
+      when "5"
+        return "E"
+      when "6"
+        return "F"
+      when "7"
+        return "G"
+      when "8"
+        return "H"
+      when "9"
+        return "I"
+      when "10"
+        return "J"
+      when "11"
+        return "K"
+      when "12"
+        return "L"
+      when "13"
+        return "M"
+      when "14"
+        return "N"
+      when "15"
+        return "O"
+      when "16"
+        return "P"
+      when "17"
+        return "Q"
+      when "18"
+        return "R"
+      when "19"
+        return "S"
+      when "20"
+        return "T"
+      when "21"
+        return "U"
+      when "22"
+        return "V"
+      when "23"
+        return "W"
+      when "24"
+        return "X"
+      when "25"
+        return "Y"
+      when "26"
+        return "Z"
+      end
+  end
 end

@@ -1,4 +1,6 @@
 class UsuariosController < ApplicationController
+  require 'digest/sha1'
+  
   before_filter :check_permissions
   
   # GET /usuarios
@@ -26,7 +28,7 @@ class UsuariosController < ApplicationController
   def login
     if request.post? and params[:Usuario]
       @usuario = Usuario.new(params[:Usuario])
-      usuario = Usuario.find_by_Username_and_Password(@usuario.Username,@usuario.Password)
+      usuario = Usuario.find_by_Username_and_Password(@usuario.Username,Digest::SHA1.hexdigest(@usuario.Password))
       if usuario
         session[:Usuario_id] = usuario.id
         session[:Usuario_idTP] = usuario.idTipoUsuario
@@ -55,6 +57,33 @@ class UsuariosController < ApplicationController
       format.json { render json: @usuario }
     end
   end
+  
+  def nuevo_gerente
+    @usuario = Usuario.new
+
+    respond_to do |format|
+      format.html # nuevo_gerente.html.erb
+      format.json { render json: @usuario }
+    end
+  end
+  
+  def nuevo_cajero
+    @usuario = Usuario.new
+
+    respond_to do |format|
+      format.html # nuevo_cajero.html.erb
+      format.json { render json: @usuario }
+    end
+  end
+  
+  def nuevo_cliente
+    @usuario = Usuario.new
+
+    respond_to do |format|
+      format.html # nuevo_cliente.html.erb
+      format.json { render json: @usuario }
+    end
+  end
 
   # GET /usuarios/1/edit
   def edit
@@ -80,17 +109,28 @@ class UsuariosController < ApplicationController
       redirect_to  :action => "index", :controller => "usuarios" 
       return  
     end
-    
+    tempPassword = @usuario.Password
+    @usuario.Password = Digest::SHA1.hexdigest(@usuario.Password)
     respond_to do |format|
       if @usuario.save
+        @usuario.Password = tempPassword
         UsuarioMailer.welcome_email(@usuario).deliver
         #Se quito ya que los usuarios no se registran, admin los crea
         #session[:Usuario_id] = @usuario.id
-        format.html { redirect_to @usuario, notice: 'Usuario fue creado exitosamente.' }
+        format.html { redirect_to usuarios_path, notice: 'Usuario fue creado exitosamente.' }
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
-        format.html { render action: "new" }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        case @usuario.idTipoUsuario.to_s
+          when "2"
+            format.html { render action: "nuevo_gerente" }
+            format.json { render json: @usuario.errors, status: :unprocessable_entity }
+          when "3"
+            format.html { render action: "nuevo_cajero" }
+            format.json { render json: @usuario.errors, status: :unprocessable_entity }
+          when "4"
+            format.html { render action: "nuevo_cliente" }
+            format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -126,15 +166,16 @@ class UsuariosController < ApplicationController
   def cambiar_password 
     @usuario = Usuario.find(session[:Usuario_id]) 
     if request.post?  #{@person.attributes.inspect}
-      usuario = Usuario.find_by_Username_and_Password(@usuario.Username,params[:Usuario][:current_password])
+      usuario = Usuario.find_by_Username_and_Password(@usuario.Username,Digest::SHA1.hexdigest(params[:Usuario][:current_password]))
       if usuario
         if (params[:Usuario][:password] == params[:Usuario][:password_confirmation])
-          usuario.Password = params[:Usuario][:password]
+          usuario.Password = Digest::SHA1.hexdigest(params[:Usuario][:password])
           #return render :text => "The object is #{params[:Usuario][:current_password]}" +
           #"<br>  #{params[:Usuario][:password]}"+
           #"<br>  #{params[:Usuario][:password_confirmation]}"
           respond_to do |format|
-            if usuario.update_attributes(:Password => params[:Usuario][:password])
+            if usuario.update_attributes(:Password => Digest::SHA1.hexdigest(params[:Usuario][:password]))
+              @usuario.Password = params[:Usuario][:password]
               UsuarioMailer.cambio_password_email(@usuario).deliver
               format.html { redirect_to usuario, notice: 'Su password fue actualizada existosamente.' }
               format.json { head :no_content }
@@ -165,7 +206,7 @@ class UsuariosController < ApplicationController
           redirect_to  :controller => 'home', :action => 'forbidden'
           return
         end
-        if session[:Usuario_idTP] == 4 && (self.action_name == 'destroy' || self.action_name == 'new' || self.action_name == 'create' || self.action_name == 'index' || self.action_name == 'edit')
+        if session[:Usuario_idTP] == 4 && (self.action_name == 'destroy' || self.action_name == 'nuevo_gerente' || self.action_name == 'nuevo_cajero' || self.action_name == 'nuevo_cliente' || self.action_name == 'new' || self.action_name == 'create' || self.action_name == 'index' || self.action_name == 'edit')
           redirect_to  :controller => 'home', :action => 'forbidden'
           return
         else
@@ -175,6 +216,10 @@ class UsuariosController < ApplicationController
           end
         end
         if session[:Usuario_idTP] == 2 && self.action_name == 'destroy'
+          redirect_to  :controller => 'home', :action => 'forbidden'
+          return
+        end
+        if session[:Usuario_idTP] == 2 && self.action_name == 'new'
           redirect_to  :controller => 'home', :action => 'forbidden'
           return
         end

@@ -46,7 +46,7 @@ class EstadoPedidosController < ApplicationController
 
     respond_to do |format|
       if @estado_pedido.save
-        format.html { redirect_to @estado_pedido, notice: 'Estado pedido fue creado exitosamente.' }
+        format.html { redirect_to estado_pedidos_path, notice: 'Estado pedido fue creado exitosamente.' }
         format.json { render json: @estado_pedido, status: :created, location: @estado_pedido }
       else
         format.html { render action: "new" }

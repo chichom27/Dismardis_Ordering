@@ -152,6 +152,7 @@ class PedidosController < ApplicationController
       
       ###############################################################################
       if checkGood == 0
+        @sumTot = 0
         if @pedido.save
           params[:items].each do |item|
             if item[1].to_i > 0
